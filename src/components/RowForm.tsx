@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Typography } from '@material-ui/core';
 import { IRow } from './MainTable';
 import Grid from '@material-ui/core/Grid';
-import { DataGrid, ColDef, ValueGetterParams } from '@material-ui/data-grid';
-
-const colums: ColDef[] = [
-  { field: 'oneCId', headerName: '1C ID', width: 70 },
-  { field: 'name', headerName: 'Name', width: 130 },
-  { field: 'brand', headerName: 'Brand', width: 130 },
-  { field: 'catNumber', headerName: 'Cat Number', width: 130 },
-  { field: 'photo', headerName: 'Photo', width: 130 },
-  { field: 'video', headerName: 'Video', width: 130 },
-  { field: 'desc', headerName: 'Description', width: 130 },
-];
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
+    spaceBetween: {
+      marginBottom: theme.spacing(2),
     },
   })
 );
@@ -78,7 +64,14 @@ export default function BasicTextFields({ row }: IProps) {
 
   console.log(name, desc);
   return (
-    <Grid container spacing={1}>
+    <Grid className={classes.spaceBetween} container spacing={1}>
+      <Grid item xs={1}>
+        <Checkbox
+          defaultChecked
+          color="primary"
+          inputProps={{ 'aria-label': 'secondary checkbox' }}
+        />
+      </Grid>
       <Grid item xs={1}>
         <TextField
           label="1C ID"
@@ -139,7 +132,7 @@ export default function BasicTextFields({ row }: IProps) {
           fullWidth
         />
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <TextField
           label="Description"
           variant="outlined"
@@ -147,6 +140,7 @@ export default function BasicTextFields({ row }: IProps) {
           onChange={handleChangeDesc}
           size="small"
           fullWidth
+          multiline
         />
       </Grid>
     </Grid>

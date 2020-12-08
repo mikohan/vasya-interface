@@ -23,6 +23,15 @@ export default function MainTable() {
       video: 'urlVideo',
       desc: 'textfield',
     },
+    {
+      oneCId: 92,
+      name: 'Seconde row',
+      brand: 'brand',
+      catNumber: '84858r8587',
+      photo: 'path/to/folder',
+      video: 'urlVideo',
+      desc: 'textfield',
+    },
   ];
   const [rows, setRows] = useState(initRow);
 
