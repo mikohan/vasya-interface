@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import RowForm from './RowForm';
 import { Button } from '@material-ui/core';
 import { initRow } from '../config';
 import { IRow } from '../interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import { IMainState } from '../store/reducers';
+import { fetchRowsFromServerThunk } from '../store/actions';
 
 export default function MainTable() {
   const [myRows, setMyRows] = useState<IRow[]>(initRow);
 
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const myRowsRedux = useSelector((state: IMainState) => {
+    return state.rowsInWork;
+  });
+
+  useEffect(() => {
+    dispatch(fetchRowsFromServerThunk());
+  }, []);
+  console.log(myRowsRedux);
 
   const emptyRow: IRow = {
     oneCId: 0,
