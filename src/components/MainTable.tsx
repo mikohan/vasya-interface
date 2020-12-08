@@ -30,7 +30,7 @@ export default function MainTable() {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         {rows.map((row: IRow) => (
-          <RowForm row={row} />
+          <RowForm key={row.oneCId} row={row} />
         ))}
       </Grid>
     </Grid>
