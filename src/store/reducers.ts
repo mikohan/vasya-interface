@@ -15,6 +15,15 @@ const mainReducer = (state: IMainState = initState, action: MyAction) => {
   switch (action.type) {
     case actionTypes.FETCH_ROWS_IN_WORK:
       return { ...state, rowsInWork: action.payload };
+    case actionTypes.ADD_EMPTY_ROW:
+      return { ...state, rowsInWork: [...state.rowsInWork, action.payload] };
+    case actionTypes.DELETE_ROW:
+      return {
+        ...state,
+        rowsInWork: state.rowsInWork.filter(
+          (row: IRow) => row.oneCId !== action.payload
+        ),
+      };
     default:
       return state;
   }

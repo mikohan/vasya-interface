@@ -9,10 +9,23 @@ export interface IFetchRowsFromServerThunk {
   payload: IRow[];
 }
 
-export type MyAction = IFetchRowsFromServerThunk;
+export interface IAddEmptyRowAction {
+  type: typeof actionTypes.ADD_EMPTY_ROW;
+  payload: IRow;
+}
+
+export interface IDeleteRowAction {
+  type: typeof actionTypes.DELETE_ROW;
+  payload: number;
+}
+
+export type MyAction =
+  | IFetchRowsFromServerThunk
+  | IAddEmptyRowAction
+  | IDeleteRowAction;
 
 const fetcher = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     resolve([...initRow]);
   });
 };
@@ -25,5 +38,28 @@ export const fetchRowsFromServerThunk = () => {
       payload: res,
     });
     // const res = axios.get(fetchRowsUrl)
+  };
+};
+const emptyRow: IRow = {
+  oneCId: 0,
+  name: '',
+  brand: '',
+  catNumber: '',
+  photo: '',
+  video: '',
+  desc: '',
+};
+
+export const addEmptyRow = () => {
+  return {
+    type: actionTypes.ADD_EMPTY_ROW,
+    payload: emptyRow,
+  };
+};
+
+export const deleteRow = (id: number) => {
+  return {
+    type: actionTypes.DELETE_ROW,
+    payload: id,
   };
 };

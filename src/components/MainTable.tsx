@@ -6,7 +6,11 @@ import { initRow } from '../config';
 import { IRow } from '../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMainState } from '../store/reducers';
-import { fetchRowsFromServerThunk } from '../store/actions';
+import {
+  addEmptyRow,
+  deleteRow,
+  fetchRowsFromServerThunk,
+} from '../store/actions';
 
 export default function MainTable() {
   const [myRows, setMyRows] = useState<IRow[]>(initRow);
@@ -33,7 +37,8 @@ export default function MainTable() {
   };
 
   const addNewRow = () => {
-    setMyRows([...myRows, emptyRow]);
+    /* setMyRows([...myRows, emptyRow]); */
+    dispatch(addEmptyRow());
     setDisabledButton(true);
   };
 
@@ -41,8 +46,8 @@ export default function MainTable() {
     const conf = window.confirm('Are You Shure?');
     if (conf) {
       // Here needs to dispatch delete action to redux
-      const newState = myRows.filter((row: IRow) => row.oneCId !== id);
-      setMyRows(newState);
+      console.log(id);
+      dispatch(deleteRow(id));
     }
   };
 
@@ -63,7 +68,7 @@ export default function MainTable() {
         {rowsInWork.map((row: IRow, idx: number) => (
           <RowForm
             idx={idx}
-            key={row.oneCId}
+            key={idx}
             row={row}
             setDisabledButton={setDisabledButton}
             handleDeleteRow={handleDeleteRow}
