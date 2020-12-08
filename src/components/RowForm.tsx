@@ -5,6 +5,8 @@ import { IRow } from './MainTable';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Typography } from '@material-ui/core';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,6 +16,19 @@ const useStyles = makeStyles((theme: Theme) =>
     indexNumber: {
       fontWeight: 500,
     },
+    firstBox: {
+      display: 'flex',
+      alignItems: 'center',
+      juctifyContent: 'space-between',
+      '& span': {
+        width: '100%',
+        height: '100%',
+      },
+    },
+    deleteIcon: {
+      paddingTop: 2,
+      cursor: 'pointer',
+    },
   })
 );
 
@@ -21,9 +36,15 @@ interface IProps {
   idx: number;
   row: IRow;
   setDisabledButton: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDeleteRow: (id: number) => void;
 }
 
-export default function Row({ row, setDisabledButton, idx }: IProps) {
+export default function Row({
+  row,
+  setDisabledButton,
+  idx,
+  handleDeleteRow,
+}: IProps) {
   const classes = useStyles();
 
   const [oneCId, setOneCId] = useState<number>(0);
@@ -75,15 +96,25 @@ export default function Row({ row, setDisabledButton, idx }: IProps) {
     setDesc(event.target.value);
   };
 
-  console.log(name, desc);
   return (
     <Grid className={classes.spaceBetween} container spacing={1}>
       <Grid item xs={1}>
-        <span className={classes.indexNumber}>{idx + 1}</span>
-        <Checkbox
-          color="primary"
-          inputProps={{ 'aria-label': 'secondary checkbox' }}
-        />
+        <Box className={classes.firstBox}>
+          <span className={classes.indexNumber}>{idx + 1}</span>
+          <span>
+            <DeleteOutlinedIcon
+              onClick={() => handleDeleteRow(oneCId)}
+              className={classes.deleteIcon}
+              color="secondary"
+            />
+          </span>
+          <span>
+            <Checkbox
+              color="primary"
+              inputProps={{ 'aria-label': 'secondary checkbox' }}
+            />
+          </span>
+        </Box>
       </Grid>
       <Grid item xs={1}>
         <TextField

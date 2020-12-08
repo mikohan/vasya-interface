@@ -54,6 +54,16 @@ export default function MainTable() {
     setDisabledButton(true);
   };
 
+  const handleDeleteRow = (id: number) => {
+    const conf = window.confirm('Are You Shure?');
+    if (conf) {
+      // Here needs to dispatch delete action to redux
+      const newState = myRows.filter((row: IRow) => row.oneCId !== id);
+      setMyRows(newState);
+      console.log(id);
+    }
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -74,6 +84,7 @@ export default function MainTable() {
             key={row.oneCId}
             row={row}
             setDisabledButton={setDisabledButton}
+            handleDeleteRow={handleDeleteRow}
           />
         ))}
       </Grid>
