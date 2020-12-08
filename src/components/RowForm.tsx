@@ -4,21 +4,26 @@ import TextField from '@material-ui/core/TextField';
 import { IRow } from './MainTable';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     spaceBetween: {
       marginBottom: theme.spacing(2),
     },
+    indexNumber: {
+      fontWeight: 500,
+    },
   })
 );
 
 interface IProps {
+  idx: number;
   row: IRow;
   setDisabledButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Row({ row, setDisabledButton }: IProps) {
+export default function Row({ row, setDisabledButton, idx }: IProps) {
   const classes = useStyles();
 
   const [oneCId, setOneCId] = useState<number>(0);
@@ -74,8 +79,8 @@ export default function Row({ row, setDisabledButton }: IProps) {
   return (
     <Grid className={classes.spaceBetween} container spacing={1}>
       <Grid item xs={1}>
+        <span className={classes.indexNumber}>{idx + 1}</span>
         <Checkbox
-          defaultChecked
           color="primary"
           inputProps={{ 'aria-label': 'secondary checkbox' }}
         />
@@ -120,7 +125,7 @@ export default function Row({ row, setDisabledButton }: IProps) {
           fullWidth
         />
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={1}>
         <TextField
           label="Photo"
           variant="outlined"
@@ -130,7 +135,7 @@ export default function Row({ row, setDisabledButton }: IProps) {
           fullWidth
         />
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={1}>
         <TextField
           label="Video"
           variant="outlined"
@@ -150,6 +155,12 @@ export default function Row({ row, setDisabledButton }: IProps) {
           fullWidth
           multiline
         />
+      </Grid>
+      <Grid item xs={1}>
+        <Typography variant="button">Url to site</Typography>
+      </Grid>
+      <Grid item xs={1}>
+        <Typography variant="button">Url to interface</Typography>
       </Grid>
     </Grid>
   );

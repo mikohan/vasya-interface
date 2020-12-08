@@ -68,8 +68,9 @@ export default function MainTable() {
         </Button>
       </Grid>
       <Grid item xs={12}>
-        {myRows.map((row: IRow) => (
+        {myRows.map((row: IRow, idx: number) => (
           <RowForm
+            idx={idx}
             key={row.oneCId}
             row={row}
             setDisabledButton={setDisabledButton}
