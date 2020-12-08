@@ -11,11 +11,18 @@ export interface IFetchRowsFromServerThunk {
 
 export type MyAction = IFetchRowsFromServerThunk;
 
+const fetcher = () => {
+  return new Promise((resolve, reject) => {
+    resolve([...initRow]);
+  });
+};
+
 export const fetchRowsFromServerThunk = () => {
-  return (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch) => {
+    const res = await fetcher();
     dispatch({
       type: actionTypes.FETCH_ROWS_IN_WORK,
-      payload: initRow,
+      payload: res,
     });
     // const res = axios.get(fetchRowsUrl)
   };

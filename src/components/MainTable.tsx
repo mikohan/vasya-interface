@@ -14,14 +14,13 @@ export default function MainTable() {
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  const myRowsRedux = useSelector((state: IMainState) => {
-    return state.rowsInWork;
+  const rowsInWork = useSelector((state: any) => {
+    return state.mainState.rowsInWork;
   });
 
   useEffect(() => {
     dispatch(fetchRowsFromServerThunk());
   }, []);
-  console.log(myRowsRedux);
 
   const emptyRow: IRow = {
     oneCId: 0,
@@ -44,7 +43,6 @@ export default function MainTable() {
       // Here needs to dispatch delete action to redux
       const newState = myRows.filter((row: IRow) => row.oneCId !== id);
       setMyRows(newState);
-      console.log(id);
     }
   };
 
@@ -62,7 +60,7 @@ export default function MainTable() {
         </Button>
       </Grid>
       <Grid item xs={12}>
-        {myRows.map((row: IRow, idx: number) => (
+        {rowsInWork.map((row: IRow, idx: number) => (
           <RowForm
             idx={idx}
             key={row.oneCId}
