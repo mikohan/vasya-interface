@@ -15,9 +15,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface IProps {
   row: IRow;
+  setDisabledButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function BasicTextFields({ row }: IProps) {
+export default function Row({ row, setDisabledButton }: IProps) {
   const classes = useStyles();
 
   const [oneCId, setOneCId] = useState<number>(0);
@@ -40,6 +41,7 @@ export default function BasicTextFields({ row }: IProps) {
 
   const handleChangeOneC = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOneCId(parseInt(event.target.value));
+    setDisabledButton(false);
   };
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);

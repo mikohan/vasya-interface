@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import RowForm from './RowForm';
+import { Button } from '@material-ui/core';
 
 export interface IRow {
   oneCId: number;
@@ -33,13 +34,49 @@ export default function MainTable() {
       desc: 'textfield',
     },
   ];
-  const [rows, setRows] = useState(initRow);
+
+  const [myRows, setMyRows] = useState<IRow[]>(initRow);
+
+  const [disabledButton, setDisabledButton] = useState<boolean>(false);
+
+  const handleDisabled = () => {
+    setDisabledButton(myRows.some((row: IRow) => row.oneCId === 0));
+  };
+  const emptyRow: IRow = {
+    oneCId: 0,
+    name: '',
+    brand: '',
+    catNumber: '',
+    photo: '',
+    video: '',
+    desc: '',
+  };
+
+  const addNewRow = () => {
+    setMyRows([...myRows, emptyRow]);
+    setDisabledButton(true);
+  };
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        {rows.map((row: IRow) => (
-          <RowForm key={row.oneCId} row={row} />
+        <Button
+          onClick={addNewRow}
+          variant="outlined"
+          size="small"
+          color="primary"
+          disabled={disabledButton}
+        >
+          New Row
+        </Button>
+      </Grid>
+      <Grid item xs={12}>
+        {myRows.map((row: IRow) => (
+          <RowForm
+            key={row.oneCId}
+            row={row}
+            setDisabledButton={setDisabledButton}
+          />
         ))}
       </Grid>
     </Grid>
