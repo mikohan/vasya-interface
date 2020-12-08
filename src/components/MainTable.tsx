@@ -39,9 +39,6 @@ export default function MainTable() {
 
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
 
-  const handleDisabled = () => {
-    setDisabledButton(myRows.some((row: IRow) => row.oneCId === 0));
-  };
   const emptyRow: IRow = {
     oneCId: 0,
     name: '',

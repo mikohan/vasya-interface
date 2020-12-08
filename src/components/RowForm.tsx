@@ -40,8 +40,14 @@ export default function Row({ row, setDisabledButton }: IProps) {
   }, [row]);
 
   const handleChangeOneC = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOneCId(parseInt(event.target.value));
-    setDisabledButton(false);
+    const value = parseInt(event.target.value);
+    const newValue = isNaN(value) ? 0 : value;
+    setOneCId(newValue);
+    if (!newValue) {
+      setDisabledButton(true);
+    } else {
+      setDisabledButton(false);
+    }
   };
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
