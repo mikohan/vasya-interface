@@ -24,6 +24,11 @@ const mainReducer = (state: IMainState = initState, action: MyAction) => {
           (row: IRow) => row.oneCId !== action.payload
         ),
       };
+    case actionTypes.SET_ONE_C_ID:
+      return {
+        ...state,
+        rowsInWork: [...state.rowsInWork],
+      };
     default:
       return state;
   }

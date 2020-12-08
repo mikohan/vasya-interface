@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { Typography } from '@material-ui/core';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Box from '@material-ui/core/Box';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,6 +65,8 @@ export default function Row({
     setVideo(row.video);
     setDesc(row.desc);
   }, [row]);
+
+  const disptach = useDispatch();
 
   const handleChangeOneC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value);
