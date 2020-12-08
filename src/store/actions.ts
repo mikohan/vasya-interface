@@ -1,6 +1,7 @@
 import { actionTypes } from './types';
 import { fetchRowsUrl, initRow } from '../config';
 import { IRow } from '../interfaces';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Dispatch } from 'redux';
 
@@ -16,19 +17,13 @@ export interface IAddEmptyRowAction {
 
 export interface IDeleteRowAction {
   type: typeof actionTypes.DELETE_ROW;
-  payload: number;
-}
-
-export interface ISetOneCIdAction {
-  type: typeof actionTypes.SET_ONE_C_ID;
-  payload: number;
+  payload: string;
 }
 
 export type MyAction =
   | IFetchRowsFromServerThunk
   | IAddEmptyRowAction
-  | IDeleteRowAction
-  | ISetOneCIdAction;
+  | IDeleteRowAction;
 
 const fetcher = () => {
   return new Promise((resolve) => {
@@ -46,33 +41,30 @@ export const fetchRowsFromServerThunk = () => {
     // const res = axios.get(fetchRowsUrl)
   };
 };
-const emptyRow: IRow = {
-  oneCId: 0,
-  name: '',
-  brand: '',
-  catNumber: '',
-  photo: '',
-  video: '',
-  desc: '',
+
+const emptyRow = (): IRow => {
+  return {
+    id: uuidv4(),
+    oneCId: 0,
+    name: '',
+    brand: '',
+    catNumber: '',
+    photo: '',
+    video: '',
+    desc: '',
+  };
 };
 
 export const addEmptyRow = () => {
   return {
     type: actionTypes.ADD_EMPTY_ROW,
-    payload: emptyRow,
+    payload: emptyRow(),
   };
 };
 
-export const deleteRow = (id: number) => {
+export const deleteRow = (id: string) => {
   return {
     type: actionTypes.DELETE_ROW,
-    payload: id,
-  };
-};
-
-export const setOneCIdAction = (id: number) => {
-  return {
-    type: actionTypes.SET_ONE_C_ID,
     payload: id,
   };
 };

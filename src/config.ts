@@ -1,8 +1,10 @@
 import { IRow } from './interfaces';
+import { v4 as uuidv4 } from 'uuid';
 
 export const fetchRowsUrl = '';
 export const initRow: IRow[] = [
   {
+    id: uuidv4(),
     oneCId: 23,
     name: 'some name',
     brand: 'brand',
@@ -12,6 +14,7 @@ export const initRow: IRow[] = [
     desc: 'textfield',
   },
   {
+    id: uuidv4(),
     oneCId: 92,
     name: 'Seconde row',
     brand: 'brand',

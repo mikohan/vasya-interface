@@ -37,7 +37,7 @@ interface IProps {
   idx: number;
   row: IRow;
   setDisabledButton: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDeleteRow: (id: number) => void;
+  handleDeleteRow: (id: string) => void;
 }
 
 export default function Row({
@@ -106,7 +106,7 @@ export default function Row({
           <span className={classes.indexNumber}>{idx + 1}</span>
           <span>
             <DeleteOutlinedIcon
-              onClick={() => handleDeleteRow(oneCId)}
+              onClick={() => handleDeleteRow(row.id)}
               className={classes.deleteIcon}
               color="secondary"
             />

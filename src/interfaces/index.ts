@@ -1,4 +1,5 @@
 export interface IRow {
+  id: string;
   oneCId: number;
   name: string;
   brand: string;
