@@ -2,39 +2,10 @@ import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import RowForm from './RowForm';
 import { Button } from '@material-ui/core';
-
-export interface IRow {
-  oneCId: number;
-  name: string;
-  brand: string;
-  catNumber: string;
-  photo: string;
-  video: string;
-  desc: string;
-}
+import { initRow } from '../config';
+import { IRow } from '../interfaces';
 
 export default function MainTable() {
-  const initRow: IRow[] = [
-    {
-      oneCId: 23,
-      name: 'some name',
-      brand: 'brand',
-      catNumber: '84858r8587',
-      photo: 'path/to/folder',
-      video: 'urlVideo',
-      desc: 'textfield',
-    },
-    {
-      oneCId: 92,
-      name: 'Seconde row',
-      brand: 'brand',
-      catNumber: '84858r8587',
-      photo: 'path/to/folder',
-      video: 'urlVideo',
-      desc: 'textfield',
-    },
-  ];
-
   const [myRows, setMyRows] = useState<IRow[]>(initRow);
 
   const [disabledButton, setDisabledButton] = useState<boolean>(false);

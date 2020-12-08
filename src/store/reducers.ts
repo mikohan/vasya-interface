@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
+import { IRow } from '../interfaces';
+import { MyAction } from './actions';
 
-const mainReducer = (state: any = {}, action: any) => {
+export interface IMainState {
+  rowsInWork: IRow[];
+}
+
+const mainReducer = (state: IMainState, action: MyAction) => {
   switch (action.type) {
     default:
       return state;
