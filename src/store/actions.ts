@@ -2,6 +2,7 @@ import { actionTypes } from './types';
 import { Urls, initRow } from '../config';
 import { IRow } from '../interfaces';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 import { Dispatch } from 'redux';
 
@@ -39,41 +40,20 @@ export type MyAction =
   | ISetOneCId
   | IMarkDone;
 
-const fetcher = () => {
-  return new Promise((resolve) => {
-    resolve([...initRow]);
-  });
-};
-
 export const fetchRowsFromServerThunk = () => {
   return async (dispatch: Dispatch) => {
-    const res = await fetcher();
+    const res = await axios.get(Urls.fetchRowsUrl);
     dispatch({
       type: actionTypes.FETCH_ROWS_IN_WORK,
-      payload: res,
+      payload: res.data,
     });
-    // const res = axios.get(fetchRowsUrl)
   };
 };
 
-const emptyRow = (): IRow => {
-  return {
-    id: uuidv4(),
-    oneCId: 0,
-    name: '',
-    brand: '',
-    catNumber: '',
-    photo: '',
-    video: '',
-    desc: '',
-    done: false,
-  };
-};
-
-export const addEmptyRow = (): IAddEmptyRowAction => {
+export const addEmptyRow = (row: IRow): IAddEmptyRowAction => {
   return {
     type: actionTypes.ADD_EMPTY_ROW,
-    payload: emptyRow(),
+    payload: row,
   };
 };
 
@@ -97,5 +77,47 @@ export const toggleDone = (id: string, isDone: boolean): IMarkDone => {
     type: actionTypes.TOGGLE_DONE,
     payload: id,
     isDone: isDone,
+  };
+};
+
+export const fillOutRowWithDataThunk = (oneCId: number) => {
+  return async (dispatch: Dispatch) => {
+    //here will be another call of get photos, videos etc
+    //1. fill out from angara77 -- done
+    //2. Save to 76 endpoint -- done
+    //3. Check for photo video etc
+
+    const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
+    const data = await res.data;
+    const newRow: IRow = {
+      uuid: uuidv4(),
+      oneCId: oneCId,
+      name: data.ang_name,
+      brand: data.brand,
+      catNumber: data.cat,
+      photo: '',
+      video: '',
+      description: '',
+      done: false,
+    };
+
+    try {
+      await axios.post(Urls.fetchRowsUrl, newRow);
+      dispatch(addEmptyRow(newRow));
+    } catch (error) {
+      if (error.response) {
+        dispatch(errorMessageAction(error.response.data));
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+    }
+  };
+};
+
+export const errorMessageAction = (error: any) => {
+  return {
+    type: actionTypes.SET_ERROR_MESSAGE,
+    payload: error,
   };
 };

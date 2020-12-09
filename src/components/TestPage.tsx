@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,70 +8,101 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import TableRowComponent from './TableRow';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRow } from '../interfaces';
+import { Button, Grid } from '@material-ui/core';
+import { setOneCIdAction, toggleDone } from '../store/actions';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import { Theme, createStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    table: {
+      minWidth: 650,
+    },
+    topRowNumber: {
+      padding: theme.spacing(2),
+    },
+  })
+);
 
 export default function TestPage() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [oneCId, setOneCId] = useState<number>(0);
+
+  const rowsInWork: IRow[] = useSelector((state: any) => {
+    return state.mainState.rowsInWork;
+  });
+
+  const handleChangeOneC = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(event.target.value);
+    const newValue = isNaN(value) ? 0 : value;
+    setOneCId(newValue);
+  };
+
+  const handleOneCBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    console.log('On blur occurs', event.target.value);
+  };
+
+  const handleAddNewRow = () => {
+    console.log('Add new row here');
+  };
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">
-                <TextField
-                  id="standard-basic"
-                  label="Standard"
-                  value={row.fat}
-                />
-              </TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <React.Fragment>
+      <Grid container spacing={2}>
+        <Grid item xs={2}>
+          <TextField
+            label="1C ID"
+            variant="outlined"
+            value={oneCId}
+            onChange={handleChangeOneC}
+            onBlur={handleOneCBlur}
+            size="small"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Fab
+            onClick={handleAddNewRow}
+            color="primary"
+            size="small"
+            aria-label="add"
+          >
+            <AddIcon />
+          </Fab>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="h6">{oneCId}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Dessert (100g serving)</TableCell>
+                  <TableCell align="right">Calories</TableCell>
+                  <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                  <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rowsInWork.map((row: IRow) => (
+                  <TableRowComponent key={row.uuid} myRow={row} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
+    </React.Fragment>
   );
 }

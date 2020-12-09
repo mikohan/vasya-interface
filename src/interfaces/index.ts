@@ -1,11 +1,11 @@
 export interface IRow {
-  id: string;
+  uuid: string;
   oneCId: number;
   name: string;
   brand: string;
   catNumber: string;
   photo: string;
   video: string;
-  desc: string;
+  description: string;
   done: boolean;
 }

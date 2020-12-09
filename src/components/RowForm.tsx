@@ -49,7 +49,7 @@ export default function Row({
 }: IProps) {
   const classes = useStyles();
 
-  console.log(row.id);
+  console.log(row.uuid);
 
   const [oneCId, setOneCId] = useState<number>(0);
   const [name, setName] = useState<string>('');
@@ -66,7 +66,7 @@ export default function Row({
     setCatNumber(row.catNumber);
     setPhoto(row.photo);
     setVideo(row.video);
-    setDesc(row.desc);
+    setDesc(row.description);
   }, [row]);
 
   const dispatch = useDispatch();
@@ -121,7 +121,7 @@ export default function Row({
           <span className={classes.indexNumber}>{idx + 1}</span>
           <span>
             <DeleteOutlinedIcon
-              onClick={() => handleDeleteRow(row.id)}
+              onClick={() => handleDeleteRow(row.uuid)}
               className={classes.deleteIcon}
               color="secondary"
             />
@@ -129,7 +129,7 @@ export default function Row({
           <span>
             <Checkbox
               checked={row.done}
-              onChange={handleIsDoneChange(row.id)}
+              onChange={handleIsDoneChange(row.uuid)}
               color="primary"
               inputProps={{ 'aria-label': 'secondary checkbox' }}
             />
@@ -141,7 +141,7 @@ export default function Row({
           label="1C ID"
           variant="outlined"
           value={oneCId}
-          onChange={handleChangeOneC(row.id)}
+          onChange={handleChangeOneC(row.uuid)}
           onBlur={handleOneCBlur}
           size="small"
           fullWidth
