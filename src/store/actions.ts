@@ -71,10 +71,10 @@ const emptyRow = (): IRow => {
   };
 };
 
-export const addEmptyRow = (): IAddEmptyRowAction => {
+export const addEmptyRow = (row: IRow): IAddEmptyRowAction => {
   return {
     type: actionTypes.ADD_EMPTY_ROW,
-    payload: emptyRow(),
+    payload: row,
   };
 };
 
@@ -108,5 +108,17 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
     const data = await res.data;
     console.log(data);
+    const newRow: IRow = {
+      id: uuidv4(),
+      oneCId: oneCId,
+      name: data.ang_name,
+      brand: data.brand,
+      catNumber: data.cat,
+      photo: '',
+      video: '',
+      desc: '',
+      done: false,
+    };
+    dispatch(addEmptyRow(newRow));
   };
 };
