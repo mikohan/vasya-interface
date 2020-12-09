@@ -10,7 +10,7 @@ interface IProps {
 }
 export default function TableRowComponent({ myRow }: IProps) {
   return (
-    <TableRow key={myRow.name}>
+    <TableRow>
       <TableCell component="th" scope="row">
         {myRow.name}
       </TableCell>
