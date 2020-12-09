@@ -102,18 +102,24 @@ export default function TestPage() {
           <Typography variant="h6">{oneCId}</Typography>
           <Button onClick={() => setOpen(true)}>djdj</Button>
         </Grid>
+        <Grid item xs={6}></Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Dessert (100g serving)</TableCell>
-                  <TableCell align="right">Calories</TableCell>
-                  <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                  <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  <TableCell>Done</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell align="right">Brand</TableCell>
+                  <TableCell align="right">Cat</TableCell>
+                  <TableCell align="right">Desc</TableCell>
+                  <TableCell align="right">Photo Fold</TableCell>
+                  <TableCell align="right">Photo Saite</TableCell>
+                  <TableCell align="right">Video Saite</TableCell>
+                  <TableCell align="right">Desc Saite</TableCell>
+                  <TableCell align="right">Del</TableCell>
+                  <TableCell align="right">To Site</TableCell>
+                  <TableCell align="right">To Card</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

@@ -83,8 +83,8 @@ export const toggleDone = (id: string, isDone: boolean): IMarkDone => {
 export const fillOutRowWithDataThunk = (oneCId: number) => {
   return async (dispatch: Dispatch) => {
     //here will be another call of get photos, videos etc
-    //1. fill out from angara77
-    //2. Save to 76 endpoint
+    //1. fill out from angara77 -- done
+    //2. Save to 76 endpoint -- done
     //3. Check for photo video etc
 
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
