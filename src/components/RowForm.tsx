@@ -122,6 +122,7 @@ export default function Row({
           </span>
           <span>
             <Checkbox
+              checked={row.done}
               onChange={handleIsDoneChange(row.id)}
               color="primary"
               inputProps={{ 'aria-label': 'secondary checkbox' }}
