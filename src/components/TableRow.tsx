@@ -21,7 +21,7 @@ export default function TableRowComponent({ myRow }: IProps) {
       <TableCell align="right">{myRow.name}</TableCell>
       <TableCell align="right">{myRow.brand}</TableCell>
       <TableCell align="right">{myRow.catNumber}</TableCell>
-      <TableCell align="right">{myRow.desc}</TableCell>
+      <TableCell align="right">{myRow.description}</TableCell>
     </TableRow>
   );
 }

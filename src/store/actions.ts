@@ -40,12 +40,6 @@ export type MyAction =
   | ISetOneCId
   | IMarkDone;
 
-const fetcher = () => {
-  return new Promise((resolve) => {
-    resolve([...initRow]);
-  });
-};
-
 export const fetchRowsFromServerThunk = () => {
   return async (dispatch: Dispatch) => {
     const res = await axios.get(Urls.fetchRowsUrl);
@@ -53,21 +47,6 @@ export const fetchRowsFromServerThunk = () => {
       type: actionTypes.FETCH_ROWS_IN_WORK,
       payload: res.data,
     });
-    // const res = axios.get(fetchRowsUrl)
-  };
-};
-
-const emptyRow = (): IRow => {
-  return {
-    id: uuidv4(),
-    oneCId: 0,
-    name: '',
-    brand: '',
-    catNumber: '',
-    photo: '',
-    video: '',
-    desc: '',
-    done: false,
   };
 };
 
@@ -111,20 +90,34 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
     const data = await res.data;
     const newRow: IRow = {
-      id: uuidv4(),
+      uuid: uuidv4(),
       oneCId: oneCId,
       name: data.ang_name,
       brand: data.brand,
       catNumber: data.cat,
       photo: '',
       video: '',
-      desc: '',
+      description: '',
       done: false,
     };
-    dispatch(addEmptyRow(newRow));
-    const json = JSON.stringify(newRow);
-    console.log(json);
 
-    // const push = await axios.post(Urls.fetchRowsUrl, json);
+    try {
+      await axios.post(Urls.fetchRowsUrl, newRow);
+      dispatch(addEmptyRow(newRow));
+    } catch (error) {
+      if (error.response) {
+        dispatch(errorMessageAction(error.response.data));
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+    }
+  };
+};
+
+export const errorMessageAction = (error: any) => {
+  return {
+    type: actionTypes.SET_ERROR_MESSAGE,
+    payload: error,
   };
 };

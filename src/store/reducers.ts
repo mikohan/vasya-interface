@@ -6,10 +6,12 @@ import { actionTypes } from './types';
 
 export interface IMainState {
   rowsInWork: IRow[];
+  errorMessage: any;
 }
 
 const initState: IMainState = {
   rowsInWork: [],
+  errorMessage: null,
 };
 
 const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
@@ -22,12 +24,12 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       return {
         ...state,
         rowsInWork: state.rowsInWork.filter(
-          (row: IRow) => row.id !== action.payload
+          (row: IRow) => row.uuid !== action.payload
         ),
       };
     case actionTypes.SET_ONE_C_ID:
       const index = state.rowsInWork.findIndex(
-        (row: IRow) => row.id === action.payload
+        (row: IRow) => row.uuid === action.payload
       );
       state.rowsInWork[index].oneCId = action.oneCId;
 
@@ -37,12 +39,14 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       };
     case actionTypes.TOGGLE_DONE:
       const idx = state.rowsInWork.findIndex(
-        (row: IRow) => row.id === action.payload
+        (row: IRow) => row.uuid === action.payload
       );
       state.rowsInWork[idx].done = action.isDone;
       return { ...state, rowsInWork: [...state.rowsInWork] };
     case actionTypes.FETCH_DATA_A77:
       return { ...state };
+    case actionTypes.SET_ERROR_MESSAGE:
+      return { ...state, errorMessage: action.payload };
     default:
       return state;
   }

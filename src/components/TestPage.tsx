@@ -96,7 +96,7 @@ export default function TestPage() {
               </TableHead>
               <TableBody>
                 {rowsInWork.map((row: IRow) => (
-                  <TableRowComponent key={row.id} myRow={row} />
+                  <TableRowComponent key={row.uuid} myRow={row} />
                 ))}
               </TableBody>
             </Table>

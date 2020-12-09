@@ -20,6 +20,12 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import { Theme, createStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+
+function Alert(props: AlertProps) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +39,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function TestPage() {
+  const error = useSelector((state: any) => {
+    return state.mainState.errorMessage;
+  });
+  const [open, setOpen] = React.useState(false);
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -99,13 +115,21 @@ export default function TestPage() {
               </TableHead>
               <TableBody>
                 {rowsInWork.map((row: IRow) => (
-                  <TableRowComponent key={row.id} myRow={row} />
+                  <TableRowComponent key={row.uuid} myRow={row} />
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
         </Grid>
       </Grid>
+
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning">
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </React.Fragment>
   );
 }
+
+// Need to make alert working later on
