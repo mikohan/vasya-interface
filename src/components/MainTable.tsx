@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRow } from '../interfaces';
 import { Grid } from '@material-ui/core';
 import {
+  errorMessageAction,
   fetchRowsFromServerThunk,
   fillOutRowWithDataThunk,
 } from '../store/actions';
@@ -22,6 +23,7 @@ import { Theme, createStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import Button from '@material-ui/core/Button';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -39,6 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function TestPage() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const error = useSelector((state: any) => {
     return state.mainState.errorMessage;
   });
@@ -49,8 +53,6 @@ export default function TestPage() {
     }
     setOpen(false);
   };
-  const classes = useStyles();
-  const dispatch = useDispatch();
 
   const [oneCId, setOneCId] = useState<number>(0);
 
@@ -98,6 +100,7 @@ export default function TestPage() {
         </Grid>
         <Grid item xs={2}>
           <Typography variant="h6">{oneCId}</Typography>
+          <Button onClick={() => setOpen(true)}>djdj</Button>
         </Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
