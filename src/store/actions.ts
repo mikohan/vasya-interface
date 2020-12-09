@@ -2,6 +2,7 @@ import { actionTypes } from './types';
 import { Urls, initRow } from '../config';
 import { IRow } from '../interfaces';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 import { Dispatch } from 'redux';
 
@@ -47,10 +48,10 @@ const fetcher = () => {
 
 export const fetchRowsFromServerThunk = () => {
   return async (dispatch: Dispatch) => {
-    const res = await fetcher();
+    const res = await axios.get(Urls.fetchRowsUrl);
     dispatch({
       type: actionTypes.FETCH_ROWS_IN_WORK,
-      payload: res,
+      payload: res.data,
     });
     // const res = axios.get(fetchRowsUrl)
   };

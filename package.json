@@ -15,6 +15,7 @@
     "@types/react-data-grid": "^4.0.5",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.11",
+    "axios": "^0.21.0",
     "node-sass": "4.14.1",
     "react": "^17.0.1",
     "react-data-grid": "^7.0.0-canary.33",
