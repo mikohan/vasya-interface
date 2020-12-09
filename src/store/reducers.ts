@@ -11,7 +11,7 @@ const initState: IMainState = {
   rowsInWork: [],
 };
 
-const mainReducer = (state: IMainState = initState, action: MyAction) => {
+const mainReducer = (state: IMainState = initState, action: any) => {
   switch (action.type) {
     case actionTypes.FETCH_ROWS_IN_WORK:
       return { ...state, rowsInWork: action.payload };
@@ -23,6 +23,16 @@ const mainReducer = (state: IMainState = initState, action: MyAction) => {
         rowsInWork: state.rowsInWork.filter(
           (row: IRow) => row.id !== action.payload
         ),
+      };
+    case actionTypes.SET_ONE_C_ID:
+      const index = state.rowsInWork.findIndex(
+        (row: IRow) => row.id === action.payload
+      );
+      state.rowsInWork[index].oneCId = action.oneCId;
+
+      return {
+        ...state,
+        rowsInWork: [...state.rowsInWork],
       };
     default:
       return state;

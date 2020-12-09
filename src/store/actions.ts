@@ -20,10 +20,17 @@ export interface IDeleteRowAction {
   payload: string;
 }
 
+export interface ISetOneCId {
+  type: typeof actionTypes.SET_ONE_C_ID;
+  payload: string;
+  oneCId: number;
+}
+
 export type MyAction =
   | IFetchRowsFromServerThunk
   | IAddEmptyRowAction
-  | IDeleteRowAction;
+  | IDeleteRowAction
+  | ISetOneCId;
 
 const fetcher = () => {
   return new Promise((resolve) => {
@@ -55,16 +62,24 @@ const emptyRow = (): IRow => {
   };
 };
 
-export const addEmptyRow = () => {
+export const addEmptyRow = (): IAddEmptyRowAction => {
   return {
     type: actionTypes.ADD_EMPTY_ROW,
     payload: emptyRow(),
   };
 };
 
-export const deleteRow = (id: string) => {
+export const deleteRow = (id: string): IDeleteRowAction => {
   return {
     type: actionTypes.DELETE_ROW,
     payload: id,
+  };
+};
+
+export const setOneCIdAction = (oneCId: number, id: string): ISetOneCId => {
+  return {
+    type: actionTypes.SET_ONE_C_ID,
+    payload: id,
+    oneCId,
   };
 };

@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Box from '@material-ui/core/Box';
 import { useDispatch } from 'react-redux';
+import { setOneCIdAction } from '../store/actions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,12 +67,15 @@ export default function Row({
     setDesc(row.desc);
   }, [row]);
 
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
 
-  const handleChangeOneC = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeOneC = (id: string) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = parseInt(event.target.value);
     const newValue = isNaN(value) ? 0 : value;
     setOneCId(newValue);
+    dispatch(setOneCIdAction(newValue, id));
     if (!newValue) {
       setDisabledButton(true);
     } else {
@@ -124,7 +128,7 @@ export default function Row({
           label="1C ID"
           variant="outlined"
           value={oneCId}
-          onChange={handleChangeOneC}
+          onChange={handleChangeOneC(row.id)}
           size="small"
           fullWidth
         />
