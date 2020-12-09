@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { IRow } from '../interfaces';
-import { MyAction } from './actions';
+import { MyAction, ISetOneCId } from './actions';
+
 import { actionTypes } from './types';
 
 export interface IMainState {
