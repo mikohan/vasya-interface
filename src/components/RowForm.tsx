@@ -8,7 +8,7 @@ import { Typography } from '@material-ui/core';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Box from '@material-ui/core/Box';
 import { useDispatch } from 'react-redux';
-import { setOneCIdAction } from '../store/actions';
+import { setOneCIdAction, toggleDone } from '../store/actions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -102,6 +102,11 @@ export default function Row({
   const handleChangeDesc = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDesc(event.target.value);
   };
+  const handleIsDoneChange = (id: string) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    dispatch(toggleDone(id, event.target.checked));
+  };
 
   return (
     <Grid className={classes.spaceBetween} container spacing={1}>
@@ -117,6 +122,7 @@ export default function Row({
           </span>
           <span>
             <Checkbox
+              onChange={handleIsDoneChange(row.id)}
               color="primary"
               inputProps={{ 'aria-label': 'secondary checkbox' }}
             />

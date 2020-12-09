@@ -23,14 +23,21 @@ export interface IDeleteRowAction {
 export interface ISetOneCId {
   type: typeof actionTypes.SET_ONE_C_ID;
   payload: string;
-  oneCId: number;
+  oneCId?: number;
+}
+
+export interface IMarkDone {
+  type: typeof actionTypes.TOGGLE_DONE;
+  payload: string;
+  isDone: boolean;
 }
 
 export type MyAction =
   | IFetchRowsFromServerThunk
   | IAddEmptyRowAction
   | IDeleteRowAction
-  | ISetOneCId;
+  | ISetOneCId
+  | IMarkDone;
 
 const fetcher = () => {
   return new Promise((resolve) => {
@@ -59,6 +66,7 @@ const emptyRow = (): IRow => {
     photo: '',
     video: '',
     desc: '',
+    done: false,
   };
 };
 
@@ -81,5 +89,13 @@ export const setOneCIdAction = (oneCId: number, id: string): ISetOneCId => {
     type: actionTypes.SET_ONE_C_ID,
     payload: id,
     oneCId,
+  };
+};
+
+export const toggleDone = (id: string, isDone: boolean): IMarkDone => {
+  return {
+    type: actionTypes.TOGGLE_DONE,
+    payload: id,
+    isDone: isDone,
   };
 };

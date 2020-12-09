@@ -12,6 +12,7 @@ export const initRow: IRow[] = [
     photo: 'path/to/folder',
     video: 'urlVideo',
     desc: 'textfield',
+    done: false,
   },
   {
     id: uuidv4(),
@@ -22,5 +23,6 @@ export const initRow: IRow[] = [
     photo: 'path/to/folder',
     video: 'urlVideo',
     desc: 'textfield',
+    done: true,
   },
 ];

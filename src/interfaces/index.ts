@@ -7,4 +7,5 @@ export interface IRow {
   photo: string;
   video: string;
   desc: string;
+  done: boolean;
 }

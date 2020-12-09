@@ -11,7 +11,7 @@ const initState: IMainState = {
   rowsInWork: [],
 };
 
-const mainReducer = (state: IMainState = initState, action: any) => {
+const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
   switch (action.type) {
     case actionTypes.FETCH_ROWS_IN_WORK:
       return { ...state, rowsInWork: action.payload };
@@ -34,6 +34,12 @@ const mainReducer = (state: IMainState = initState, action: any) => {
         ...state,
         rowsInWork: [...state.rowsInWork],
       };
+    case actionTypes.TOGGLE_DONE:
+      const idx = state.rowsInWork.findIndex(
+        (row: IRow) => row.id === action.payload
+      );
+      state.rowsInWork[idx].done = action.isDone;
+      return { ...state, rowsInWork: [...state.rowsInWork] };
     default:
       return state;
   }
