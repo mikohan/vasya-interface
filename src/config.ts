@@ -9,7 +9,7 @@ interface IUrls {
 export const Urls: IUrls = {
   fetchRowsUrl: 'http://localhost:8000/vasyainterface/workingrows/rows/',
   angaraUrl:
-    'http://angara77.loc/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
+    'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
 };
 
 export const initRow: IRow[] = [
