@@ -8,6 +8,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import TableRowComponent from './TableRow';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRow } from '../interfaces';
 
 const useStyles = makeStyles({
   table: {
@@ -35,6 +38,11 @@ const rows = [
 
 export default function TestPage() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const rowsInWork: IRow[] = useSelector((state: any) => {
+    return state.mainState.rowsInWork;
+  });
 
   return (
     <TableContainer component={Paper}>
@@ -51,24 +59,8 @@ export default function TestPage() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">
-                <TextField
-                  id="standard-basic"
-                  label="Standard"
-                  value={row.fat}
-                />
-              </TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
+          {rowsInWork.map((row: IRow) => (
+            <TableRowComponent myRow={row} />
           ))}
         </TableBody>
       </Table>
