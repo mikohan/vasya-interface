@@ -104,10 +104,12 @@ export const toggleDone = (id: string, isDone: boolean): IMarkDone => {
 export const fillOutRowWithDataThunk = (oneCId: number) => {
   return async (dispatch: Dispatch) => {
     //here will be another call of get photos, videos etc
+    //1. fill out from angara77
+    //2. Save to 76 endpoint
+    //3. Check for photo video etc
 
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
     const data = await res.data;
-    console.log(data);
     const newRow: IRow = {
       id: uuidv4(),
       oneCId: oneCId,
@@ -120,5 +122,9 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       done: false,
     };
     dispatch(addEmptyRow(newRow));
+    const json = JSON.stringify(newRow);
+    console.log(json);
+
+    // const push = await axios.post(Urls.fetchRowsUrl, json);
   };
 };
