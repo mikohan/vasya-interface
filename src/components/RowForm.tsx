@@ -49,6 +49,8 @@ export default function Row({
 }: IProps) {
   const classes = useStyles();
 
+  console.log(row.id);
+
   const [oneCId, setOneCId] = useState<number>(0);
   const [name, setName] = useState<string>('');
   const [brand, setBrand] = useState<string>('');
@@ -68,6 +70,10 @@ export default function Row({
   }, [row]);
 
   const dispatch = useDispatch();
+
+  const handleOneCBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    console.log('On blur occurs');
+  };
 
   const handleChangeOneC = (id: string) => (
     event: React.ChangeEvent<HTMLInputElement>
@@ -136,6 +142,7 @@ export default function Row({
           variant="outlined"
           value={oneCId}
           onChange={handleChangeOneC(row.id)}
+          onBlur={handleOneCBlur}
           size="small"
           fullWidth
         />

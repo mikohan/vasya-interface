@@ -1,5 +1,5 @@
 import { actionTypes } from './types';
-import { fetchRowsUrl, initRow } from '../config';
+import { Urls, initRow } from '../config';
 import { IRow } from '../interfaces';
 import { v4 as uuidv4 } from 'uuid';
 
