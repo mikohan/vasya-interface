@@ -41,6 +41,8 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       );
       state.rowsInWork[idx].done = action.isDone;
       return { ...state, rowsInWork: [...state.rowsInWork] };
+    case actionTypes.FETCH_DATA_A77:
+      return { ...state };
     default:
       return state;
   }

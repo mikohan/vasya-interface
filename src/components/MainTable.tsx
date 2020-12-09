@@ -11,11 +11,10 @@ import TextField from '@material-ui/core/TextField';
 import TableRowComponent from './TableRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRow } from '../interfaces';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import {
   fetchRowsFromServerThunk,
-  setOneCIdAction,
-  toggleDone,
+  fillOutRowWithDataThunk,
 } from '../store/actions';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
@@ -41,7 +40,6 @@ export default function TestPage() {
 
   useEffect(() => {
     dispatch(fetchRowsFromServerThunk());
-    console.log('triggered');
   }, []);
 
   const rowsInWork: IRow[] = useSelector((state: any) => {
@@ -54,12 +52,9 @@ export default function TestPage() {
     setOneCId(newValue);
   };
 
-  const handleOneCBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    console.log('On blur occurs', event.target.value);
-  };
-
   const handleAddNewRow = () => {
-    console.log('Add new row here');
+    dispatch(fillOutRowWithDataThunk(oneCId));
+    console.log('Add new row here', oneCId);
   };
 
   return (
@@ -71,7 +66,6 @@ export default function TestPage() {
             variant="outlined"
             value={oneCId}
             onChange={handleChangeOneC}
-            onBlur={handleOneCBlur}
             size="small"
             fullWidth
           />

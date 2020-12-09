@@ -8,4 +8,5 @@ export enum actionTypes {
   SAVE_ROW_TO_SERVER = 'SAVE_ROW_TO_SERVER',
   SET_ONE_C_ID = 'SET_ONE_C_ID',
   TOGGLE_DONE = 'TOGGLE_DONE',
+  FETCH_DATA_A77 = 'FETCH_DATA_A77',
 }
