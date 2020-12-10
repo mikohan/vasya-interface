@@ -79,7 +79,7 @@ export default function TestPage() {
 
   let errorArr = [];
   for (const key in error) {
-    errorArr.push(error[key]);
+    errorArr.push(JSON.stringify({ [key]: error[key] }));
   }
 
   return (
@@ -145,7 +145,7 @@ export default function TestPage() {
       >
         <Alert onClose={handleClose} severity="warning">
           {errorArr.map((str: string, i: number) => (
-            <div key={i}>{JSON.stringify(str)}</div>
+            <div key={i}>{str}</div>
           ))}
         </Alert>
       </Snackbar>

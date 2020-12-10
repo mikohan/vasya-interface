@@ -139,8 +139,15 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
     try {
       const res = await axios.get(`${Urls.checkProductUrl}/${oneCId}/`);
       check = res.data;
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      dispatch(
+        errorMessageAction({
+          Error:
+            'Продукт с таким Один С ID Еще не заведен в итерфейс. Самое время его туда завести!',
+        })
+      );
+      dispatch(toggleSnakbarAction(true));
+      console.log(error.response.data);
     }
 
     populatedRow = { ...newRow };
@@ -158,11 +165,18 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       dispatch(addEmptyRow(populatedRow));
     } catch (error) {
       if (error.response) {
-        dispatch(errorMessageAction(error.response.data));
+        let errorMessage: any = null;
+        if (error.response.data.hasOwnProperty('name')) {
+          errorMessage = {
+            error:
+              'Возможно этот товар не выгружается из Один Эски на сайт. Проверь!',
+          };
+        } else {
+          errorMessage = error.response.data;
+        }
+        dispatch(errorMessageAction(errorMessage));
         dispatch(toggleSnakbarAction(true));
         console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
       }
     }
   };
