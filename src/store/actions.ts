@@ -89,6 +89,10 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
 
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
     const data = await res.data;
+    const check = await axios.get(`${Urls.checkProductUrl}/${oneCId}/`);
+
+    console.log(check.data, 'INside chek data');
+
     const newRow: IRow = {
       uuid: uuidv4(),
       oneCId: oneCId,
@@ -100,10 +104,23 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       description: '',
       done: false,
     };
+    const populatedRow = { ...newRow };
+    const {
+      have_photo,
+      have_video,
+      have_description,
+      have_attribute,
+    } = check.data;
+    if (check.data) {
+      populatedRow.photo = have_photo;
+      populatedRow.video = have_video;
+      populatedRow.descSite = have_description;
+      populatedRow.attibute = have_attribute;
+    }
 
     try {
       await axios.post(Urls.fetchRowsUrl, newRow);
-      dispatch(addEmptyRow(newRow));
+      dispatch(addEmptyRow(populatedRow));
     } catch (error) {
       if (error.response) {
         dispatch(errorMessageAction(error.response.data));

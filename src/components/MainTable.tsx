@@ -72,7 +72,7 @@ export default function TestPage() {
 
   const handleAddNewRow = () => {
     dispatch(fillOutRowWithDataThunk(oneCId));
-    console.log('Add new row here', oneCId);
+    setOneCId(0);
   };
 
   return (
@@ -100,7 +100,6 @@ export default function TestPage() {
         </Grid>
         <Grid item xs={2}>
           <Typography variant="h6">{oneCId}</Typography>
-          <Button onClick={() => setOpen(true)}>djdj</Button>
         </Grid>
         <Grid item xs={6}></Grid>
         <Grid item xs={12}>
@@ -109,17 +108,18 @@ export default function TestPage() {
               <TableHead>
                 <TableRow>
                   <TableCell>Done</TableCell>
+                  <TableCell>OneCId</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell align="right">Brand</TableCell>
                   <TableCell align="right">Cat</TableCell>
-                  <TableCell align="right">Desc</TableCell>
                   <TableCell align="right">Photo Fold</TableCell>
-                  <TableCell align="right">Photo Saite</TableCell>
-                  <TableCell align="right">Video Saite</TableCell>
-                  <TableCell align="right">Desc Saite</TableCell>
-                  <TableCell align="right">Del</TableCell>
+                  <TableCell align="right">Photo Site</TableCell>
+                  <TableCell align="right">Video</TableCell>
+                  <TableCell align="right">Attr</TableCell>
+                  <TableCell align="right">Notes</TableCell>
                   <TableCell align="right">To Site</TableCell>
                   <TableCell align="right">To Card</TableCell>
+                  <TableCell align="right">Del</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

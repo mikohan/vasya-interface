@@ -4,6 +4,7 @@ export interface IRow {
   name: string;
   brand: string;
   catNumber: string;
+  attibute?: boolean;
   photo: boolean;
   video: boolean;
   description: string;

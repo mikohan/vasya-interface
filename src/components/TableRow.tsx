@@ -22,23 +22,32 @@ export default function TableRowComponent({ myRow }: IProps) {
     <React.Fragment>
       <TableRow>
         <TableCell>{checkbox}</TableCell>
+        <TableCell>{myRow.oneCId}</TableCell>
         <TableCell component="th" scope="row">
           {myRow.name}
         </TableCell>
-        <TableCell align="right">{myRow.oneCId}</TableCell>
-        <TableCell align="right">{myRow.name}</TableCell>
         <TableCell align="right">{myRow.brand}</TableCell>
         <TableCell align="right">{myRow.catNumber}</TableCell>
-        <TableCell align="right">{myRow.description}</TableCell>
-        <TableCell align="right">{myRow.description}</TableCell>
+        <TableCell align="right">{myRow.photo ? 'yes' : 'no'}</TableCell>
+        <TableCell align="right">{myRow.photoSite ? 'est' : 'net'}</TableCell>
         <TableCell align="right">
-          <TextField id="standard-basic" label="Standard" value={myRow.name} />
+          {myRow.video ? 'est vid' : 'net vid'}
         </TableCell>
+        <TableCell align="right">
+          {myRow.attibute ? 'attr' : 'no attr'}
+        </TableCell>
+        <TableCell align="right">
+          <TextField
+            id="standard-basic"
+            label="Заметки"
+            value={myRow.description}
+          />
+        </TableCell>
+        <TableCell align="right">{myRow.oneCId}</TableCell>
+        <TableCell align="right">{myRow.oneCId}</TableCell>
         <TableCell>
           <DeleteOutlinedIcon color="secondary" />
         </TableCell>
-        <TableCell align="right">{myRow.oneCId}</TableCell>
-        <TableCell align="right">{myRow.oneCId}</TableCell>
       </TableRow>
     </React.Fragment>
   );
