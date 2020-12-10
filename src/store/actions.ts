@@ -95,8 +95,8 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       name: data.ang_name,
       brand: data.brand,
       catNumber: data.cat,
-      photo: '',
-      video: '',
+      photo: false,
+      video: false,
       description: '',
       done: false,
     };

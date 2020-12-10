@@ -4,8 +4,14 @@ export interface IRow {
   name: string;
   brand: string;
   catNumber: string;
-  photo: string;
-  video: string;
+  photo: boolean;
+  video: boolean;
   description: string;
   done: boolean;
+  dateCreated?: Date;
+  dateChanged?: Date;
+  photoSite?: boolean;
+  descSite?: boolean;
+  linkToSite?: string;
+  linkToProduct?: string;
 }
