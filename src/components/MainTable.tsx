@@ -72,6 +72,16 @@ export default function TestPage() {
     setOneCId(newValue);
   };
 
+  const handleAddNewRowEnter = (
+    event: React.KeyboardEvent<HTMLInputElement> //React.KeyboardEvent<HTMLButtonElement>
+  ) => {
+    console.log(event);
+    if (event.key === 'Enter') {
+      dispatch(fillOutRowWithDataThunk(oneCId));
+      // setOneCId(0);
+    }
+  };
+
   const handleAddNewRow = () => {
     dispatch(fillOutRowWithDataThunk(oneCId));
     setOneCId(0);
@@ -93,10 +103,12 @@ export default function TestPage() {
             onChange={handleChangeOneC}
             size="small"
             fullWidth
+            onKeyDown={handleAddNewRowEnter}
           />
         </Grid>
         <Grid item xs={2}>
           <Fab
+            type="submit"
             onClick={handleAddNewRow}
             color="primary"
             size="small"
