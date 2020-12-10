@@ -118,7 +118,6 @@ export default function TestPage() {
                   <TableCell align="right">Attr</TableCell>
                   <TableCell align="right">Notes</TableCell>
                   <TableCell align="right">To Site</TableCell>
-                  <TableCell align="right">To Card</TableCell>
                   <TableCell align="right">Del</TableCell>
                 </TableRow>
               </TableHead>

@@ -6,11 +6,20 @@ import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Checkbox from '@material-ui/core/Checkbox';
+import { useDispatch } from 'react-redux';
+import { deleteRow, deleteRowThunk } from '../store/actions';
 
 interface IProps {
   myRow: IRow;
 }
 export default function TableRowComponent({ myRow }: IProps) {
+  const dispatch = useDispatch();
+
+  const handleDelete = (uuid: string, id: any): void => {
+    console.log('delete add confirm please');
+    // needs to add confirm
+    dispatch(deleteRowThunk(uuid, id));
+  };
   const checkbox = (
     <Checkbox
       checked={myRow.done}
@@ -43,10 +52,12 @@ export default function TableRowComponent({ myRow }: IProps) {
             value={myRow.description}
           />
         </TableCell>
-        <TableCell align="right">{myRow.oneCId}</TableCell>
-        <TableCell align="right">{myRow.oneCId}</TableCell>
+        <TableCell align="right">{myRow.linkToSite}</TableCell>
         <TableCell>
-          <DeleteOutlinedIcon color="secondary" />
+          <DeleteOutlinedIcon
+            onClick={() => handleDelete(myRow.uuid, myRow.id)}
+            color="secondary"
+          />
         </TableCell>
       </TableRow>
     </React.Fragment>

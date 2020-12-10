@@ -1,4 +1,5 @@
 export interface IRow {
+  id?: number | string;
   uuid: string;
   oneCId: number;
   name: string;

@@ -33,6 +33,13 @@ export interface IMarkDone {
   isDone: boolean;
 }
 
+export interface IChek {
+  have_photo: boolean;
+  have_video: boolean;
+  have_attribute: boolean;
+  have_description: boolean;
+}
+
 export type MyAction =
   | IFetchRowsFromServerThunk
   | IAddEmptyRowAction
@@ -64,6 +71,19 @@ export const deleteRow = (id: string): IDeleteRowAction => {
   };
 };
 
+export const deleteRowThunk = (uuid: string, id: any) => {
+  return async (dispatch: Dispatch) => {
+    console.log(id);
+    try {
+      await axios.delete(`${Urls.deleteUrl}/${id}/`);
+    } catch (e) {
+      console.log(e);
+    }
+
+    dispatch(deleteRow(uuid));
+  };
+};
+
 export const setOneCIdAction = (oneCId: number, id: string): ISetOneCId => {
   return {
     type: actionTypes.SET_ONE_C_ID,
@@ -89,11 +109,22 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
 
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
     const data = await res.data;
-    const check = await axios.get(`${Urls.checkProductUrl}/${oneCId}/`);
+    try {
+    } catch (e) {
+      console.log(e.result.data);
+    }
 
-    console.log(check.data, 'INside chek data');
+    let populatedRow: IRow;
+
+    let check: IChek = {
+      have_photo: false,
+      have_video: false,
+      have_description: false,
+      have_attribute: false,
+    };
 
     const newRow: IRow = {
+      id: data.id,
       uuid: uuidv4(),
       oneCId: oneCId,
       name: data.ang_name,
@@ -104,21 +135,26 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       description: '',
       done: false,
     };
-    const populatedRow = { ...newRow };
-    const {
-      have_photo,
-      have_video,
-      have_description,
-      have_attribute,
-    } = check.data;
-    if (check.data) {
+
+    try {
+      const res = await axios.get(`${Urls.checkProductUrl}/${oneCId}/`);
+      check = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+
+    populatedRow = { ...newRow };
+    const { have_photo, have_video, have_description, have_attribute } = check;
+    if (check) {
       populatedRow.photo = have_photo;
       populatedRow.video = have_video;
       populatedRow.descSite = have_description;
       populatedRow.attibute = have_attribute;
+      populatedRow.linkToSite = `https://angara77.com/porter-0520000611-${oneCId}/`;
     }
 
     try {
+      console.log(newRow);
       await axios.post(Urls.fetchRowsUrl, newRow);
       dispatch(addEmptyRow(populatedRow));
     } catch (error) {
