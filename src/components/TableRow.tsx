@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useDispatch } from 'react-redux';
-import { deleteRow, deleteRowThunk } from '../store/actions';
+import { deleteRowThunk } from '../store/actions';
 
 interface IProps {
   myRow: IRow;
@@ -17,7 +17,12 @@ export default function TableRowComponent({ myRow }: IProps) {
 
   const handleDelete = (uuid: string, id: any): void => {
     // needs to add confirm
-    dispatch(deleteRowThunk(uuid, id));
+    const conf = window.confirm('Are You Shure?');
+    if (conf) {
+      dispatch(deleteRowThunk(uuid, id));
+    } else {
+      return;
+    }
   };
   const checkbox = (
     <Checkbox

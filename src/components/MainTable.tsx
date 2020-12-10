@@ -73,7 +73,7 @@ export default function TestPage() {
   };
 
   const handleAddNewRowEnter = (
-    event: React.KeyboardEvent<HTMLInputElement> //React.KeyboardEvent<HTMLButtonElement>
+    event: React.KeyboardEvent<HTMLInputElement>
   ) => {
     console.log(event);
     if (event.key === 'Enter') {
