@@ -49,8 +49,6 @@ export default function Row({
 }: IProps) {
   const classes = useStyles();
 
-  console.log(row.uuid);
-
   const [oneCId, setOneCId] = useState<number>(0);
   const [desc, setDesc] = useState<string>('');
 
@@ -60,9 +58,7 @@ export default function Row({
 
   const dispatch = useDispatch();
 
-  const handleOneCBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    console.log('On blur occurs');
-  };
+  const handleOneCBlur = (event: React.FocusEvent<HTMLInputElement>) => {};
 
   const handleChangeOneC = (id: string) => (
     event: React.ChangeEvent<HTMLInputElement>

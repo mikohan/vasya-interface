@@ -1,5 +1,5 @@
 import { actionTypes } from './types';
-import { Urls, initRow } from '../config';
+import { Urls } from '../config';
 import { IRow } from '../interfaces';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
@@ -38,6 +38,7 @@ export interface IChek {
   have_video: boolean;
   have_attribute: boolean;
   have_description: boolean;
+  have_photo_in_folder: boolean;
 }
 
 export type MyAction =
@@ -73,7 +74,6 @@ export const deleteRow = (id: string): IDeleteRowAction => {
 
 export const deleteRowThunk = (uuid: string, id: any) => {
   return async (dispatch: Dispatch) => {
-    console.log(id);
     try {
       await axios.delete(`${Urls.deleteUrl}/${id}/`);
     } catch (e) {
@@ -121,6 +121,7 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       have_video: false,
       have_description: false,
       have_attribute: false,
+      have_photo_in_folder: false,
     };
 
     const newRow: IRow = {
@@ -151,9 +152,16 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
     }
 
     populatedRow = { ...newRow };
-    const { have_photo, have_video, have_description, have_attribute } = check;
+    const {
+      have_photo,
+      have_video,
+      have_description,
+      have_attribute,
+      have_photo_in_folder,
+    } = check;
     if (check) {
-      populatedRow.photo = have_photo;
+      populatedRow.photo = have_photo_in_folder;
+      populatedRow.photoSite = have_photo;
       populatedRow.video = have_video;
       populatedRow.descSite = have_description;
       populatedRow.attibute = have_attribute;
@@ -193,5 +201,59 @@ export const toggleSnakbarAction = (open: boolean = false) => {
   return {
     type: actionTypes.TOGGLE_SNACKBAR,
     payload: open,
+  };
+};
+
+export const checkAllAttributesAction = () => {
+  return async (dispatch: Dispatch, getState: any) => {
+    const { mainState } = getState();
+    const rows = mainState.rowsInWork;
+
+    if (rows.length > 0) {
+      let check: IChek = {
+        have_photo: false,
+        have_video: false,
+        have_description: false,
+        have_attribute: false,
+        have_photo_in_folder: false,
+      };
+      const newRows = await Promise.all(
+        rows.map(async (row: IRow) => {
+          try {
+            const res = await axios.get(
+              `${Urls.checkProductUrl}/${row.oneCId}/`
+            );
+            check = res.data;
+          } catch (error) {
+            dispatch(
+              errorMessageAction({
+                Error:
+                  'Продукт с таким Один С ID Еще не заведен в итерфейс. Самое время его туда завести!',
+              })
+            );
+            dispatch(toggleSnakbarAction(true));
+            console.log(error.response.data);
+          }
+
+          const {
+            have_photo,
+            have_video,
+            have_description,
+            have_attribute,
+            have_photo_in_folder,
+          } = check;
+          if (check) {
+            row.photo = have_photo_in_folder;
+            row.photoSite = have_photo;
+            row.video = have_video;
+            row.descSite = have_description;
+            row.attibute = have_attribute;
+            row.linkToSite = `https://angara77.com/porter-0520000611-${row.oneCId}/`;
+          }
+          return row;
+        })
+      );
+      dispatch({ type: actionTypes.UPDATE_ROWS_ATTRS, payload: newRows });
+    }
   };
 };

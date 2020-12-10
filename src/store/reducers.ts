@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { IRow } from '../interfaces';
-import { MyAction, ISetOneCId } from './actions';
+import { MyAction } from './actions';
 
 import { actionTypes } from './types';
 
@@ -49,6 +49,8 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       return { ...state, errorMessage: action.payload };
     case actionTypes.TOGGLE_SNACKBAR:
       return { ...state, openSnakbar: action.payload };
+    case actionTypes.UPDATE_ROWS_ATTRS:
+      return { ...state, rowsInWork: action.payload };
     default:
       return state;
   }

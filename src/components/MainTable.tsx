@@ -11,12 +11,12 @@ import TextField from '@material-ui/core/TextField';
 import TableRowComponent from './TableRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRow } from '../interfaces';
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import {
   toggleSnakbarAction,
-  errorMessageAction,
   fetchRowsFromServerThunk,
   fillOutRowWithDataThunk,
+  checkAllAttributesAction,
 } from '../store/actions';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
@@ -24,7 +24,6 @@ import { Theme, createStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import Button from '@material-ui/core/Button';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -60,7 +59,7 @@ export default function TestPage() {
 
   useEffect(() => {
     dispatch(fetchRowsFromServerThunk());
-  }, []);
+  }, [dispatch]);
 
   const rowsInWork: IRow[] = useSelector((state: any) => {
     return state.mainState.rowsInWork;
@@ -75,7 +74,6 @@ export default function TestPage() {
   const handleAddNewRowEnter = (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    console.log(event);
     if (event.key === 'Enter') {
       dispatch(fillOutRowWithDataThunk(oneCId));
       // setOneCId(0);
@@ -85,6 +83,9 @@ export default function TestPage() {
   const handleAddNewRow = () => {
     dispatch(fillOutRowWithDataThunk(oneCId));
     setOneCId(0);
+  };
+  const handleUpdateInfo = () => {
+    dispatch(checkAllAttributesAction());
   };
 
   let errorArr = [];
@@ -120,7 +121,11 @@ export default function TestPage() {
         <Grid item xs={2}>
           <Typography variant="h6">{oneCId}</Typography>
         </Grid>
-        <Grid item xs={6}></Grid>
+        <Grid item xs={6}>
+          <Button onClick={handleUpdateInfo} variant="outlined" color="primary">
+            UPDATE INFO
+          </Button>
+        </Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
