@@ -154,12 +154,12 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
     }
 
     try {
-      console.log(newRow);
       await axios.post(Urls.fetchRowsUrl, newRow);
       dispatch(addEmptyRow(populatedRow));
     } catch (error) {
       if (error.response) {
         dispatch(errorMessageAction(error.response.data));
+        dispatch(toggleSnakbarAction(true));
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
@@ -172,5 +172,12 @@ export const errorMessageAction = (error: any) => {
   return {
     type: actionTypes.SET_ERROR_MESSAGE,
     payload: error,
+  };
+};
+
+export const toggleSnakbarAction = (open: boolean = false) => {
+  return {
+    type: actionTypes.TOGGLE_SNACKBAR,
+    payload: open,
   };
 };

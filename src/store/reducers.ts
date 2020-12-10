@@ -47,6 +47,8 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       return { ...state };
     case actionTypes.SET_ERROR_MESSAGE:
       return { ...state, errorMessage: action.payload };
+    case actionTypes.TOGGLE_SNACKBAR:
+      return { ...state, openSnakbar: action.payload };
     default:
       return state;
   }

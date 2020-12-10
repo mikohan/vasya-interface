@@ -16,7 +16,6 @@ export default function TableRowComponent({ myRow }: IProps) {
   const dispatch = useDispatch();
 
   const handleDelete = (uuid: string, id: any): void => {
-    console.log('delete add confirm please');
     // needs to add confirm
     dispatch(deleteRowThunk(uuid, id));
   };

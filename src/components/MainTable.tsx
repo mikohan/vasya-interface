@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRow } from '../interfaces';
 import { Grid } from '@material-ui/core';
 import {
+  toggleSnakbarAction,
   errorMessageAction,
   fetchRowsFromServerThunk,
   fillOutRowWithDataThunk,
@@ -46,12 +47,13 @@ export default function TestPage() {
   const error = useSelector((state: any) => {
     return state.mainState.errorMessage;
   });
-  const [open, setOpen] = React.useState(false);
+  const { openSnakbar } = useSelector((state: any) => state.mainState);
+
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    dispatch(toggleSnakbarAction(false));
   };
 
   const [oneCId, setOneCId] = useState<number>(0);
@@ -74,6 +76,11 @@ export default function TestPage() {
     dispatch(fillOutRowWithDataThunk(oneCId));
     setOneCId(0);
   };
+
+  let errorArr = [];
+  for (const key in error) {
+    errorArr.push(error[key]);
+  }
 
   return (
     <React.Fragment>
@@ -131,9 +138,15 @@ export default function TestPage() {
         </Grid>
       </Grid>
 
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar
+        open={openSnakbar}
+        autoHideDuration={16000}
+        onClose={handleClose}
+      >
         <Alert onClose={handleClose} severity="warning">
-          This is a success message!
+          {errorArr.map((str: string, i: number) => (
+            <div key={i}>{JSON.stringify(str)}</div>
+          ))}
         </Alert>
       </Snackbar>
     </React.Fragment>
