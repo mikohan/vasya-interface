@@ -85,6 +85,9 @@ export default function TestPage() {
 
   const handleAddNewRow = () => {
     dispatch(fillOutRowWithDataThunk(oneCId));
+
+    // checking All updates for photo, video , etc..
+    dispatch(checkAllAttributesAction());
     setOneCId(0);
   };
   const handleUpdateInfo = () => {
