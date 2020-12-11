@@ -41,6 +41,11 @@ export interface IChek {
   have_photo_in_folder: boolean;
 }
 
+export interface ICheckAllAttributesAction {
+  type: typeof actionTypes.UPDATE_ROWS_ATTRS;
+  payload: IRow[];
+}
+
 export type MyAction =
   | IFetchRowsFromServerThunk
   | IAddEmptyRowAction
@@ -49,12 +54,15 @@ export type MyAction =
   | IMarkDone;
 
 export const fetchRowsFromServerThunk = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch<any>) => {
     const res = await axios.get(Urls.fetchRowsUrl);
+
     dispatch({
       type: actionTypes.FETCH_ROWS_IN_WORK,
       payload: res.data,
     });
+    // here some suspecious pise of code
+    dispatch(checkAllAttributesAction());
   };
 };
 

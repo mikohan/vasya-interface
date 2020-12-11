@@ -11,6 +11,7 @@ import { deleteRowThunk } from '../store/actions';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import green from '@material-ui/core/colors/green';
+import LinkIcon from '@material-ui/icons/Link';
 
 const greenColor = green[700];
 
@@ -81,7 +82,11 @@ export default function TableRowComponent({ myRow }: IProps) {
             value={myRow.description}
           />
         </TableCell>
-        <TableCell align="right">{myRow.linkToSite}</TableCell>
+        <TableCell align="right">
+          <a href={myRow.linkToSite} target="_blank">
+            <LinkIcon color="primary" />
+          </a>
+        </TableCell>
         <TableCell>
           <DeleteOutlinedIcon
             onClick={() => handleDelete(myRow.uuid, myRow.id)}
