@@ -7,11 +7,15 @@ import { actionTypes } from './types';
 export interface IMainState {
   rowsInWork: IRow[];
   errorMessage: any;
+  openSnakbar: boolean;
+  isLoading: boolean;
 }
 
 const initState: IMainState = {
   rowsInWork: [],
   errorMessage: null,
+  openSnakbar: false,
+  isLoading: false,
 };
 
 const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
@@ -51,6 +55,8 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       return { ...state, openSnakbar: action.payload };
     case actionTypes.UPDATE_ROWS_ATTRS:
       return { ...state, rowsInWork: action.payload };
+    case actionTypes.IS_LOADING:
+      return { ...state, isLoading: action.payload };
     default:
       return state;
   }

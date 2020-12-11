@@ -103,10 +103,13 @@ export const toggleDone = (id: string, isDone: boolean): IMarkDone => {
 export const fillOutRowWithDataThunk = (oneCId: number) => {
   return async (dispatch: Dispatch) => {
     //here will be another call of get photos, videos etc
+    //0. Set loading to true
     //1. fill out from angara77 -- done
     //2. Save to 76 endpoint -- done
     //3. Check for photo video etc
+    //4. Set Loading to false
 
+    dispatch(loadingAction(true));
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
     const data = await res.data;
     try {
@@ -187,6 +190,8 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
         console.log(error.response.data);
       }
     }
+
+    dispatch(loadingAction(false));
   };
 };
 
@@ -204,8 +209,11 @@ export const toggleSnakbarAction = (open: boolean = false) => {
   };
 };
 
+//Checks all rows for photo video etc
+
 export const checkAllAttributesAction = () => {
   return async (dispatch: Dispatch, getState: any) => {
+    dispatch(loadingAction(true));
     const { mainState } = getState();
     const rows = mainState.rowsInWork;
 
@@ -254,6 +262,16 @@ export const checkAllAttributesAction = () => {
         })
       );
       dispatch({ type: actionTypes.UPDATE_ROWS_ATTRS, payload: newRows });
+      dispatch(loadingAction(false));
     }
+  };
+};
+
+// Loading status toggling
+
+export const loadingAction = (isLoading: boolean) => {
+  return {
+    type: actionTypes.IS_LOADING,
+    payload: isLoading,
   };
 };
