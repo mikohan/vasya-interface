@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={'/react'}>
       <div>
         <AppBar />
         <Box className="containerBox">

@@ -2,6 +2,7 @@
   "name": "vasya-interface",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://partshub.tk/react",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/data-grid": "^4.0.0-alpha.11",
