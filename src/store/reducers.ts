@@ -60,6 +60,24 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       return { ...state, rowsInWork: action.payload };
     case actionTypes.IS_LOADING:
       return { ...state, isLoading: action.payload };
+    case actionTypes.CHANGE_DESCRIPTION:
+      const descRow = state.rowsInWork.findIndex(
+        (row: IRow) => row.uuid === action.payload
+      );
+      state.rowsInWork[descRow].description = action.description;
+      return {
+        ...state,
+        rowsInWork: [...state.rowsInWork],
+      };
+    case actionTypes.PUT_ROW_TO_SERVER:
+      const changeRow = state.rowsInWork.findIndex(
+        (row: IRow) => row.uuid === action.payload.uuid
+      );
+      state.rowsInWork[changeRow] = action.payload;
+      return {
+        ...state,
+        rowsInWork: [...state.rowsInWork],
+      };
     default:
       return state;
   }

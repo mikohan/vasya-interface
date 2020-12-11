@@ -283,3 +283,26 @@ export const loadingAction = (isLoading: boolean) => {
     payload: isLoading,
   };
 };
+
+// save row to server
+
+export const putRowToServerThunk = (row: IRow) => {
+  return async (dispatch: Dispatch<any>) => {
+    const res = await axios.put(`${Urls.fetchRowsUrl}${row.id}/`, row);
+    dispatch({
+      type: actionTypes.PUT_ROW_TO_SERVER,
+      payload: res.data,
+    });
+    dispatch(checkAllAttributesAction());
+  };
+};
+
+// Change description in specific row
+
+export const changeDescriptionAction = (uuid: string, description: string) => {
+  return {
+    type: actionTypes.CHANGE_DESCRIPTION,
+    payload: uuid,
+    description: description,
+  };
+};

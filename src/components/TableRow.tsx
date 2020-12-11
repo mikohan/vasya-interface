@@ -1,13 +1,17 @@
 import { IRow } from '../interfaces';
 
-import React from 'react';
+import React, { useState } from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useDispatch } from 'react-redux';
-import { deleteRowThunk } from '../store/actions';
+import {
+  changeDescriptionAction,
+  deleteRowThunk,
+  putRowToServerThunk,
+} from '../store/actions';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import green from '@material-ui/core/colors/green';
@@ -20,6 +24,17 @@ interface IProps {
 }
 export default function TableRowComponent({ myRow }: IProps) {
   const dispatch = useDispatch();
+  const [desc, setDesc] = useState(myRow.description);
+
+  const handleDesc = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setDesc(event.target.value);
+    dispatch(changeDescriptionAction(myRow.uuid, desc));
+  };
+  const saveRow = () => {
+    console.log('clicked brand');
+    console.log(myRow);
+    dispatch(putRowToServerThunk(myRow));
+  };
 
   const handleDelete = (uuid: string, id: any): void => {
     // needs to add confirm
@@ -30,6 +45,7 @@ export default function TableRowComponent({ myRow }: IProps) {
       return;
     }
   };
+  const customColumnStyle = { minWidth: '200px' };
   const checkbox = (
     <Checkbox
       checked={myRow.done}
@@ -45,7 +61,9 @@ export default function TableRowComponent({ myRow }: IProps) {
         <TableCell component="th" scope="row">
           {myRow.name}
         </TableCell>
-        <TableCell align="right">{myRow.brand}</TableCell>
+        <TableCell onClick={saveRow} align="right">
+          {myRow.brand}
+        </TableCell>
         <TableCell align="right">{myRow.catNumber}</TableCell>
         <TableCell align="right">
           {myRow.photo ? (
@@ -75,11 +93,13 @@ export default function TableRowComponent({ myRow }: IProps) {
             <ClearIcon color="secondary" />
           )}
         </TableCell>
-        <TableCell align="right">
+        <TableCell style={customColumnStyle} align="right">
           <TextField
             id="standard-basic"
             label="Заметки"
-            value={myRow.description}
+            multiline
+            onChange={handleDesc}
+            value={desc}
           />
         </TableCell>
         <TableCell align="right">
