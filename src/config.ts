@@ -3,10 +3,12 @@ interface IUrls {
   angaraUrl: string;
   checkProductUrl: string;
   deleteUrl: string;
+  fetchRowsDoneUrl: string;
 }
 
 export const Urlss: IUrls = {
   fetchRowsUrl: 'https://partshub.tk/vasyainterface/workingrows/rows/',
+  fetchRowsDoneUrl: 'https://partshub.tk/vasyainterface/workingrows/rowsdone/',
   angaraUrl:
     'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
   checkProductUrl: 'https://partshub.tk/vasyainterface/check',
@@ -17,6 +19,8 @@ export function makeUrls(location: string): IUrls {
   if (location === 'local') {
     return {
       fetchRowsUrl: 'http://localhost:8000/vasyainterface/workingrows/rows/',
+      fetchRowsDoneUrl:
+        'http://localhost:8000/vasyainterface/workingrows/rowsdone/',
       angaraUrl:
         'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
       checkProductUrl: 'https://partshub.tk/vasyainterface/check',
@@ -25,6 +29,8 @@ export function makeUrls(location: string): IUrls {
   }
   return {
     fetchRowsUrl: 'https://partshub.tk/vasyainterface/workingrows/rows/',
+    fetchRowsDoneUrl:
+      'https://partshub.tk/vasyainterface/workingrows/rowsdone/',
     angaraUrl:
       'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
     checkProductUrl: 'https://partshub.tk/vasyainterface/check',
