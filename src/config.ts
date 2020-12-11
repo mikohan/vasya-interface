@@ -37,4 +37,6 @@ export function makeUrls(location: string): IUrls {
     deleteUrl: 'https://partshub.tk/vasyainterface/workingrows/rows',
   };
 }
-export const Urls = makeUrls('local');
+
+// Change parameter to 'local' if work with local endpoints
+export const Urls = makeUrls('remote');

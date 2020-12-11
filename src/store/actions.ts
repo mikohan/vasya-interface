@@ -70,7 +70,6 @@ export const fetchRowsFromServerThunk = () => {
 export const fetchRowsFromServerReadyThunk = () => {
   return async (dispatch: Dispatch<any>) => {
     const res = await axios.get(Urls.fetchRowsDoneUrl);
-    console.log(res.data);
 
     dispatch({
       type: actionTypes.FETCH_ROWS_READY,

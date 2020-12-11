@@ -41,7 +41,7 @@ export default function ButtonAppBar() {
             <Link to="/">Home</Link>
           </Typography>
           <Link to="/testpage">
-            <Button color="inherit">TestPage</Button>
+            <Button color="inherit">READY ROWS</Button>
           </Link>
         </Toolbar>
       </AppBar>
