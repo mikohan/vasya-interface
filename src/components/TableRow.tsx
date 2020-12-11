@@ -115,7 +115,9 @@ export default function TableRowComponent({ myRow }: IProps) {
           align="right"
         >
           {myRow.photo ? (
-            <CheckIcon style={{ color: greenColor }} />
+            <CheckIcon
+              className={myRow.isDone ? classes.muttedText : classes.greenText}
+            />
           ) : (
             <ClearIcon
               className={myRow.isDone ? classes.muttedText : classes.redText}
