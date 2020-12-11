@@ -8,6 +8,11 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useDispatch } from 'react-redux';
 import { deleteRowThunk } from '../store/actions';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import green from '@material-ui/core/colors/green';
+
+const greenColor = green[700];
 
 interface IProps {
   myRow: IRow;
@@ -41,13 +46,33 @@ export default function TableRowComponent({ myRow }: IProps) {
         </TableCell>
         <TableCell align="right">{myRow.brand}</TableCell>
         <TableCell align="right">{myRow.catNumber}</TableCell>
-        <TableCell align="right">{myRow.photo ? 'yes' : 'no'}</TableCell>
-        <TableCell align="right">{myRow.photoSite ? 'est' : 'net'}</TableCell>
         <TableCell align="right">
-          {myRow.video ? 'est vid' : 'net vid'}
+          {myRow.photo ? (
+            <CheckIcon style={{ color: greenColor }} />
+          ) : (
+            <ClearIcon color="secondary" />
+          )}
         </TableCell>
         <TableCell align="right">
-          {myRow.attibute ? 'attr' : 'no attr'}
+          {myRow.photoSite ? (
+            <CheckIcon style={{ color: greenColor }} />
+          ) : (
+            <ClearIcon color="secondary" />
+          )}
+        </TableCell>
+        <TableCell align="right">
+          {myRow.video ? (
+            <CheckIcon style={{ color: greenColor }} />
+          ) : (
+            <ClearIcon color="secondary" />
+          )}
+        </TableCell>
+        <TableCell align="right">
+          {myRow.attibute ? (
+            <CheckIcon style={{ color: greenColor }} />
+          ) : (
+            <ClearIcon color="secondary" />
+          )}
         </TableCell>
         <TableCell align="right">
           <TextField
