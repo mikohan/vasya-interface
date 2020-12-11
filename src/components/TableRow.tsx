@@ -16,14 +16,35 @@ import {
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import green from '@material-ui/core/colors/green';
+import grey from '@material-ui/core/colors/grey';
+import red from '@material-ui/core/colors/red';
 import LinkIcon from '@material-ui/icons/Link';
+import { makeStyles, createStyles, Theme } from '@material-ui/core';
 
 const greenColor = green[700];
+const greyColor = grey[300];
+const redColor = red[700];
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    muttedText: {
+      color: greyColor,
+      textDecoration: 'line-trought',
+    },
+    greenText: {
+      color: greenColor,
+    },
+    redText: {
+      color: redColor,
+    },
+  })
+);
 
 interface IProps {
   myRow: IRow;
 }
 export default function TableRowComponent({ myRow }: IProps) {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [desc, setDesc] = useState(myRow.description);
   const [checked, setChecked] = React.useState(myRow.isDone || false);
@@ -39,7 +60,6 @@ export default function TableRowComponent({ myRow }: IProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
     dispatch(toggleDone(myRow, event.target.checked));
-    console.log(myRow);
 
     dispatch(putRowToServerThunk(myRow));
   };
@@ -65,39 +85,75 @@ export default function TableRowComponent({ myRow }: IProps) {
   return (
     <React.Fragment>
       <TableRow>
-        <TableCell>{checkbox}</TableCell>
-        <TableCell>{myRow.oneCId}</TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell className={myRow.isDone ? classes.muttedText : ''}>
+          {checkbox}
+        </TableCell>
+        <TableCell className={myRow.isDone ? classes.muttedText : ''}>
+          {myRow.oneCId}
+        </TableCell>
+        <TableCell
+          className={myRow.isDone ? classes.muttedText : ''}
+          component="th"
+          scope="row"
+        >
           {myRow.name}
         </TableCell>
-        <TableCell align="right">{myRow.brand}</TableCell>
-        <TableCell align="right">{myRow.catNumber}</TableCell>
-        <TableCell align="right">
+        <TableCell
+          className={myRow.isDone ? classes.muttedText : ''}
+          align="right"
+        >
+          {myRow.brand}
+        </TableCell>
+        <TableCell
+          className={myRow.isDone ? classes.muttedText : ''}
+          align="right"
+        >
+          {myRow.catNumber}
+        </TableCell>
+        <TableCell
+          className={myRow.isDone ? classes.muttedText : ''}
+          align="right"
+        >
           {myRow.photo ? (
             <CheckIcon style={{ color: greenColor }} />
           ) : (
-            <ClearIcon color="secondary" />
+            <ClearIcon
+              className={myRow.isDone ? classes.muttedText : classes.redText}
+            />
           )}
         </TableCell>
-        <TableCell align="right">
+        <TableCell
+          className={myRow.isDone ? classes.muttedText : ''}
+          align="right"
+        >
           {myRow.photoSite ? (
-            <CheckIcon style={{ color: greenColor }} />
+            <CheckIcon
+              className={myRow.isDone ? classes.muttedText : classes.greenText}
+            />
           ) : (
             <ClearIcon color="secondary" />
           )}
         </TableCell>
         <TableCell align="right">
           {myRow.video ? (
-            <CheckIcon style={{ color: greenColor }} />
+            <CheckIcon
+              className={myRow.isDone ? classes.muttedText : classes.greenText}
+            />
           ) : (
-            <ClearIcon color="secondary" />
+            <ClearIcon
+              className={myRow.isDone ? classes.muttedText : classes.redText}
+            />
           )}
         </TableCell>
         <TableCell align="right">
           {myRow.attibute ? (
-            <CheckIcon style={{ color: greenColor }} />
+            <CheckIcon
+              className={myRow.isDone ? classes.muttedText : classes.greenText}
+            />
           ) : (
-            <ClearIcon color="secondary" />
+            <ClearIcon
+              className={myRow.isDone ? classes.muttedText : classes.redText}
+            />
           )}
         </TableCell>
         <TableCell style={customColumnStyle} align="right">
@@ -111,12 +167,18 @@ export default function TableRowComponent({ myRow }: IProps) {
           />
         </TableCell>
         <TableCell align="right">
-          <a href={myRow.linkToSite} target="_blank" rel="noreferrer">
+          <a
+            className={myRow.isDone ? classes.muttedText : ''}
+            href={myRow.linkToSite}
+            target="_blank"
+            rel="noreferrer"
+          >
             <LinkIcon color="primary" />
           </a>
         </TableCell>
         <TableCell>
           <DeleteOutlinedIcon
+            className={myRow.isDone ? classes.muttedText : ''}
             onClick={() => handleDelete(myRow.uuid, myRow.id)}
             color="secondary"
           />
