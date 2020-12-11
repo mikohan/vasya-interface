@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import TableRowComponent from './TableRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRow } from '../interfaces';
 import { Button, Grid } from '@material-ui/core';
@@ -20,31 +11,19 @@ import {
 } from '../store/actions';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
-import { Theme, createStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { IState } from '../store/reducers';
 
 import Spiner from './Spiner';
+import TableComponent from './Table';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    table: {
-      minWidth: 650,
-    },
-    topRowNumber: {
-      padding: theme.spacing(2),
-    },
-  })
-);
-
 export default function TestPage() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const error = useSelector((state: any) => {
     return state.mainState.errorMessage;
@@ -145,31 +124,7 @@ export default function TestPage() {
           )}
         </Grid>
         <Grid item xs={12}>
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Done</TableCell>
-                  <TableCell>OneCId</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="right">Brand</TableCell>
-                  <TableCell align="right">Cat</TableCell>
-                  <TableCell align="right">Photo Fold</TableCell>
-                  <TableCell align="right">Photo Site</TableCell>
-                  <TableCell align="right">Video</TableCell>
-                  <TableCell align="right">Attr</TableCell>
-                  <TableCell align="right">Notes</TableCell>
-                  <TableCell align="right">To Site</TableCell>
-                  <TableCell align="right">Del</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rowsInWork.map((row: IRow) => (
-                  <TableRowComponent key={row.uuid} myRow={row} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <TableComponent rowsInWork={rowsInWork} />
         </Grid>
       </Grid>
 
