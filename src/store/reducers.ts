@@ -6,6 +6,7 @@ import { actionTypes } from './types';
 
 export interface IMainState {
   rowsInWork: IRow[];
+  rowsReady: IRow[];
   errorMessage: any;
   openSnakbar: boolean;
   isLoading: boolean;
@@ -16,6 +17,7 @@ export interface IState {
 
 const initState: IMainState = {
   rowsInWork: [],
+  rowsReady: [],
   errorMessage: null,
   openSnakbar: false,
   isLoading: false,
@@ -25,6 +27,8 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
   switch (action.type) {
     case actionTypes.FETCH_ROWS_IN_WORK:
       return { ...state, rowsInWork: action.payload };
+    case actionTypes.FETCH_ROWS_READY:
+      return { ...state, rowsReady: action.payload };
     case actionTypes.ADD_EMPTY_ROW:
       return { ...state, rowsInWork: [...state.rowsInWork, action.payload] };
     case actionTypes.DELETE_ROW:

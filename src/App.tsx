@@ -3,7 +3,7 @@ import './App.scss';
 import AppBar from './components/AppBar';
 import MainTable from './components/MainTable';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import TestPage from './components/TestPage';
+import ReadyPage from './components/ReadyPage';
 import Box from '@material-ui/core/Box';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <AppBar />
         <Box className="containerBox">
           <Switch>
-            <Route path="/testpage" component={TestPage} />
+            <Route path="/testpage" component={ReadyPage} />
             <Route path="/" component={MainTable} />
           </Switch>
         </Box>
