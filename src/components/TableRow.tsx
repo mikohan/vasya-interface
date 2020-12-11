@@ -30,9 +30,8 @@ export default function TableRowComponent({ myRow }: IProps) {
     setDesc(event.target.value);
     dispatch(changeDescriptionAction(myRow.uuid, desc));
   };
-  const saveRow = () => {
-    console.log('clicked brand');
-    console.log(myRow);
+  const handleSaveDescToServer = () => {
+    console.log('On Blur');
     dispatch(putRowToServerThunk(myRow));
   };
 
@@ -61,9 +60,7 @@ export default function TableRowComponent({ myRow }: IProps) {
         <TableCell component="th" scope="row">
           {myRow.name}
         </TableCell>
-        <TableCell onClick={saveRow} align="right">
-          {myRow.brand}
-        </TableCell>
+        <TableCell align="right">{myRow.brand}</TableCell>
         <TableCell align="right">{myRow.catNumber}</TableCell>
         <TableCell align="right">
           {myRow.photo ? (
@@ -99,11 +96,12 @@ export default function TableRowComponent({ myRow }: IProps) {
             label="Заметки"
             multiline
             onChange={handleDesc}
+            onBlur={handleSaveDescToServer}
             value={desc}
           />
         </TableCell>
         <TableCell align="right">
-          <a href={myRow.linkToSite} target="_blank">
+          <a href={myRow.linkToSite} target="_blank" rel="noreferrer">
             <LinkIcon color="primary" />
           </a>
         </TableCell>
