@@ -24,6 +24,9 @@ import { Theme, createStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import { IState } from '../store/reducers';
+
+import Spiner from './Spiner';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -93,6 +96,10 @@ export default function TestPage() {
     errorArr.push(JSON.stringify({ [key]: error[key] }));
   }
 
+  const isLoading = useSelector((state: IState) => {
+    return state.mainState.isLoading;
+  });
+
   return (
     <React.Fragment>
       <Grid container spacing={2}>
@@ -119,12 +126,20 @@ export default function TestPage() {
           </Fab>
         </Grid>
         <Grid item xs={2}>
-          <Typography variant="h6">{oneCId}</Typography>
+          <Typography variant="h6">One C ID: {oneCId}</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Button onClick={handleUpdateInfo} variant="outlined" color="primary">
-            UPDATE INFO
-          </Button>
+          {isLoading ? (
+            <Spiner />
+          ) : (
+            <Button
+              onClick={handleUpdateInfo}
+              variant="outlined"
+              color="primary"
+            >
+              UPDATE INFO
+            </Button>
+          )}
         </Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>

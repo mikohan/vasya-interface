@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CircularIndeterminate() {
+export default function Spiner() {
   const classes = useStyles();
 
   return (

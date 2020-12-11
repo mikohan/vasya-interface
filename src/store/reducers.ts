@@ -10,6 +10,9 @@ export interface IMainState {
   openSnakbar: boolean;
   isLoading: boolean;
 }
+export interface IState {
+  mainState: IMainState;
+}
 
 const initState: IMainState = {
   rowsInWork: [],
