@@ -46,9 +46,9 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       };
     case actionTypes.TOGGLE_DONE:
       const idx = state.rowsInWork.findIndex(
-        (row: IRow) => row.uuid === action.payload
+        (row: IRow) => row.uuid === action.payload.uuid
       );
-      state.rowsInWork[idx].done = action.isDone;
+      state.rowsInWork[idx].isDone = action.isDone;
       return { ...state, rowsInWork: [...state.rowsInWork] };
     case actionTypes.FETCH_DATA_A77:
       return { ...state };

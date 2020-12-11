@@ -9,7 +9,7 @@ export interface IRow {
   photo: boolean;
   video: boolean;
   description: string;
-  done: boolean;
+  isDone: boolean;
   dateCreated?: Date;
   dateChanged?: Date;
   photoSite?: boolean;

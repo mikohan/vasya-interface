@@ -29,7 +29,7 @@ export interface ISetOneCId {
 
 export interface IMarkDone {
   type: typeof actionTypes.TOGGLE_DONE;
-  payload: string;
+  payload: IRow;
   isDone: boolean;
 }
 
@@ -100,10 +100,10 @@ export const setOneCIdAction = (oneCId: number, id: string): ISetOneCId => {
   };
 };
 
-export const toggleDone = (id: string, isDone: boolean): IMarkDone => {
+export const toggleDone = (row: IRow, isDone: boolean): IMarkDone => {
   return {
     type: actionTypes.TOGGLE_DONE,
-    payload: id,
+    payload: row,
     isDone: isDone,
   };
 };
@@ -145,7 +145,7 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       photo: false,
       video: false,
       description: '',
-      done: false,
+      isDone: false,
     };
 
     try {

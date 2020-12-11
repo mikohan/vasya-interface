@@ -76,11 +76,6 @@ export default function Row({
   const handleChangeDesc = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDesc(event.target.value);
   };
-  const handleIsDoneChange = (id: string) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    dispatch(toggleDone(id, event.target.checked));
-  };
 
   return (
     <Grid className={classes.spaceBetween} container spacing={1}>
@@ -96,8 +91,7 @@ export default function Row({
           </span>
           <span>
             <Checkbox
-              checked={row.done}
-              onChange={handleIsDoneChange(row.uuid)}
+              checked={row.isDone}
               color="primary"
               inputProps={{ 'aria-label': 'secondary checkbox' }}
             />

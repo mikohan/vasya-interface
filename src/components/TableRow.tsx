@@ -11,6 +11,7 @@ import {
   changeDescriptionAction,
   deleteRowThunk,
   putRowToServerThunk,
+  toggleDone,
 } from '../store/actions';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -25,13 +26,21 @@ interface IProps {
 export default function TableRowComponent({ myRow }: IProps) {
   const dispatch = useDispatch();
   const [desc, setDesc] = useState(myRow.description);
+  const [checked, setChecked] = React.useState(myRow.isDone || false);
 
   const handleDesc = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDesc(event.target.value);
     dispatch(changeDescriptionAction(myRow.uuid, desc));
   };
   const handleSaveDescToServer = () => {
-    console.log('On Blur');
+    dispatch(putRowToServerThunk(myRow));
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+    dispatch(toggleDone(myRow, event.target.checked));
+    console.log(myRow);
+
     dispatch(putRowToServerThunk(myRow));
   };
 
@@ -47,7 +56,8 @@ export default function TableRowComponent({ myRow }: IProps) {
   const customColumnStyle = { minWidth: '200px' };
   const checkbox = (
     <Checkbox
-      checked={myRow.done}
+      checked={checked}
+      onChange={handleChange}
       color="primary"
       inputProps={{ 'aria-label': 'secondary checkbox' }}
     />

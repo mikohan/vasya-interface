@@ -1,6 +1,3 @@
-import { IRow } from './interfaces';
-import { v4 as uuidv4 } from 'uuid';
-
 interface IUrls {
   fetchRowsUrl: string;
   angaraUrl: string;
@@ -15,28 +12,3 @@ export const Urls: IUrls = {
   checkProductUrl: 'https://partshub.tk/vasyainterface/check',
   deleteUrl: 'http://localhost:8000/vasyainterface/workingrows/rows',
 };
-
-export const initRow: IRow[] = [
-  {
-    uuid: uuidv4(),
-    oneCId: 23,
-    name: 'some name',
-    brand: 'brand',
-    catNumber: '84858r8587',
-    photo: false,
-    video: false,
-    description: 'textfield',
-    done: false,
-  },
-  {
-    uuid: uuidv4(),
-    oneCId: 92,
-    name: 'Seconde row',
-    brand: 'brand',
-    catNumber: '84858r8587',
-    photo: false,
-    video: false,
-    description: 'textfield',
-    done: true,
-  },
-];
