@@ -63,6 +63,7 @@ export const fetchRowsFromServerThunk = () => {
     });
     // here some suspecious pise of code
     dispatch(checkAllAttributesAction());
+    dispatch(loadingAction(false));
   };
 };
 
