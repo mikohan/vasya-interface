@@ -8,12 +8,12 @@ import Box from '@material-ui/core/Box';
 
 function App() {
   return (
-    <BrowserRouter basename={'/react'}>
+    <BrowserRouter>
       <div>
         <AppBar />
         <Box className="containerBox">
           <Switch>
-            <Route path="/testpage" component={ReadyPage} />
+            <Route path="/testpage/" component={ReadyPage} />
             <Route path="/" component={MainTable} />
           </Switch>
         </Box>

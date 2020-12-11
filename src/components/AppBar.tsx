@@ -40,7 +40,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             <Link to={`${process.env.PUBLIC_URL}/`}>Home</Link>
           </Typography>
-          <Link to={`${process.env.PUBLIC_URL}/testpage`}>
+          <Link to={`${process.env.PUBLIC_URL}/testpage/`}>
             <Button color="inherit">READY ROWS</Button>
           </Link>
         </Toolbar>
