@@ -22,9 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface IProps {
   rowsInWork: IRow[];
+  ready?: boolean;
 }
 
-export default function TableComponent({ rowsInWork }: IProps) {
+export default function TableComponent({ rowsInWork, ready }: IProps) {
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -47,7 +48,7 @@ export default function TableComponent({ rowsInWork }: IProps) {
         </TableHead>
         <TableBody>
           {rowsInWork.map((row: IRow) => (
-            <TableRowComponent key={row.uuid} myRow={row} />
+            <TableRowComponent key={row.uuid} myRow={row} ready={ready} />
           ))}
         </TableBody>
       </Table>

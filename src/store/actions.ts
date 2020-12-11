@@ -77,7 +77,7 @@ export const fetchRowsFromServerReadyThunk = () => {
       payload: res.data,
     });
     // here some suspecious pise of code
-    dispatch(checkAllAttributesAction());
+    dispatch(checkAllAttributesAction(true));
     dispatch(loadingAction(false));
   };
 };
@@ -235,11 +235,16 @@ export const toggleSnakbarAction = (open: boolean = false) => {
 
 //Checks all rows for photo video etc
 
-export const checkAllAttributesAction = () => {
+export const checkAllAttributesAction = (ready: boolean = false) => {
   return async (dispatch: Dispatch, getState: any) => {
     dispatch(loadingAction(true));
     const { mainState } = getState();
-    const rows = mainState.rowsInWork;
+    let rows: IRow[];
+    if (ready) {
+      rows = mainState.rowsReady;
+    } else {
+      rows = mainState.rowsInWork;
+    }
 
     if (rows.length > 0) {
       let check: IChek = {
@@ -285,7 +290,14 @@ export const checkAllAttributesAction = () => {
           return row;
         })
       );
-      dispatch({ type: actionTypes.UPDATE_ROWS_ATTRS, payload: newRows });
+      if (ready) {
+        dispatch({
+          type: actionTypes.UPDATE_ROWS_READY_ATTRS,
+          payload: newRows,
+        });
+      } else {
+        dispatch({ type: actionTypes.UPDATE_ROWS_ATTRS, payload: newRows });
+      }
       dispatch(loadingAction(false));
     }
   };

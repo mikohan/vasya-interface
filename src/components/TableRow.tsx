@@ -42,8 +42,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface IProps {
   myRow: IRow;
+  ready?: boolean;
 }
-export default function TableRowComponent({ myRow }: IProps) {
+export default function TableRowComponent({ myRow, ready }: IProps) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [desc, setDesc] = useState(myRow.description);
@@ -86,7 +87,7 @@ export default function TableRowComponent({ myRow }: IProps) {
     <React.Fragment>
       <TableRow>
         <TableCell className={myRow.isDone ? classes.muttedText : ''}>
-          {checkbox}
+          {!ready && checkbox}
         </TableCell>
         <TableCell className={myRow.isDone ? classes.muttedText : ''}>
           {myRow.oneCId}
@@ -133,7 +134,9 @@ export default function TableRowComponent({ myRow }: IProps) {
               className={myRow.isDone ? classes.muttedText : classes.greenText}
             />
           ) : (
-            <ClearIcon color="secondary" />
+            <ClearIcon
+              className={myRow.isDone ? classes.muttedText : classes.redText}
+            />
           )}
         </TableCell>
         <TableCell align="right">

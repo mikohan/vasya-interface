@@ -62,6 +62,8 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       return { ...state, openSnakbar: action.payload };
     case actionTypes.UPDATE_ROWS_ATTRS:
       return { ...state, rowsInWork: action.payload };
+    case actionTypes.UPDATE_ROWS_READY_ATTRS:
+      return { ...state, rowsReady: action.payload };
     case actionTypes.IS_LOADING:
       return { ...state, isLoading: action.payload };
     case actionTypes.CHANGE_DESCRIPTION:
