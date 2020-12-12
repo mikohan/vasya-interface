@@ -162,14 +162,18 @@ export default function TableRowComponent({ myRow, ready }: IProps) {
           )}
         </TableCell>
         <TableCell style={customColumnStyle} align="right">
-          <TextField
-            id="standard-basic"
-            label="Заметки"
-            multiline
-            onChange={handleDesc}
-            onBlur={handleSaveDescToServer}
-            value={desc}
-          />
+          {ready ? (
+            myRow.description
+          ) : (
+            <TextField
+              id="standard-basic"
+              label="Заметки"
+              multiline
+              onChange={handleDesc}
+              onBlur={handleSaveDescToServer}
+              value={desc}
+            />
+          )}
         </TableCell>
         <TableCell align="right">
           <a
