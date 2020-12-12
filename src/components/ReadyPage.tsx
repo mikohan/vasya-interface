@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRow } from '../interfaces';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Theme, createStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import TableComponent from './Table';

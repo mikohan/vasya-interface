@@ -4,6 +4,8 @@ import { IRow } from '../interfaces';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
+import { config } from '../auth/aaxios';
+
 import { Dispatch } from 'redux';
 
 export interface IFetchRowsFromServerThunk {
@@ -98,7 +100,7 @@ export const deleteRow = (id: string): IDeleteRowAction => {
 export const deleteRowThunk = (uuid: string, id: any) => {
   return async (dispatch: Dispatch) => {
     try {
-      await axios.delete(`${Urls.deleteUrl}/${id}/`);
+      await axios.delete(`${Urls.deleteUrl}/${id}/`, config);
     } catch (e) {
       console.log(e);
     }
@@ -195,7 +197,7 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
     }
 
     try {
-      await axios.post(Urls.fetchRowsUrl, newRow);
+      await axios.post(Urls.fetchRowsUrl, newRow, config);
       dispatch(addEmptyRow(populatedRow));
     } catch (error) {
       if (error.response) {
@@ -315,7 +317,7 @@ export const loadingAction = (isLoading: boolean) => {
 
 export const putRowToServerThunk = (row: IRow) => {
   return async (dispatch: Dispatch<any>) => {
-    const res = await axios.put(`${Urls.fetchRowsUrl}${row.id}/`, row);
+    const res = await axios.put(`${Urls.fetchRowsUrl}${row.id}/`, row, config);
     dispatch({
       type: actionTypes.PUT_ROW_TO_SERVER,
       payload: res.data,
