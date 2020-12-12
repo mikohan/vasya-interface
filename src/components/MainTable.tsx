@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRow } from '../interfaces';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Hidden } from '@material-ui/core';
 import {
   toggleSnakbarAction,
   fetchRowsFromServerThunk,
@@ -85,7 +85,7 @@ export default function TestPage() {
   return (
     <React.Fragment>
       <Grid container spacing={2}>
-        <Grid item xs={2}>
+        <Grid item xs={4} md={2}>
           <TextField
             label="1C ID"
             variant="outlined"
@@ -107,10 +107,12 @@ export default function TestPage() {
             <AddIcon />
           </Fab>
         </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6">One C ID: {oneCId}</Typography>
-        </Grid>
-        <Grid item xs={6}>
+        <Hidden mdDown>
+          <Grid item xs={2}>
+            <Typography variant="h6">One C ID: {oneCId}</Typography>
+          </Grid>
+        </Hidden>
+        <Grid item xs={4}>
           {isLoading ? (
             <Spiner />
           ) : (
