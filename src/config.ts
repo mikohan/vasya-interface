@@ -5,6 +5,7 @@ interface IUrls {
   deleteUrl: string;
   fetchRowsDoneUrl: string;
   noPhotosList: string;
+  photoFolder: string;
 }
 
 export function makeUrls(location: string): IUrls {
@@ -18,6 +19,7 @@ export function makeUrls(location: string): IUrls {
       checkProductUrl: 'https://partshub.tk/vasyainterface/check',
       deleteUrl: 'http://localhost:8000/vasyainterface/workingrows/rows',
       noPhotosList: 'http://localhost:8000/vasyainterface/nophoto/',
+      photoFolder: 'http://localhost:8000/vasyainterface/checkfolders/',
     };
   }
   return {
@@ -29,6 +31,7 @@ export function makeUrls(location: string): IUrls {
     checkProductUrl: 'https://partshub.tk/vasyainterface/check',
     deleteUrl: 'https://partshub.tk/vasyainterface/workingrows/rows',
     noPhotosList: 'https://partshub.tk/vasyainterface/nophoto/',
+    photoFolder: 'https://partshub.tk/vasyainterface/checkfolders/',
   };
 }
 
