@@ -5,6 +5,7 @@ import MainTable from './components/MainTable';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReadyPage from './components/ReadyPage';
 import Box from '@material-ui/core/Box';
+import CheckPhotos from './components/CheckPhotos';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <AppBar />
         <Box className="containerBox">
           <Switch>
-            <Route path="/testpage/" component={ReadyPage} />
+            <Route exact path="/testpage/" component={ReadyPage} />
+            <Route exact path="/checkphotos/" component={CheckPhotos} />
             <Route path="/" component={MainTable} />
           </Switch>
         </Box>
