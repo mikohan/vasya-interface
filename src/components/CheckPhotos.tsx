@@ -15,14 +15,12 @@ export default function CheckPhotos() {
     const resFold = await axios.get(Urls.photoFolder);
     const folders = resFold.data.fld;
     const result: any[] = [];
-    res.data.forEach((item: any) => {
-      for (let fold in folders) {
-        if (parseInt(item.one_c_id) === parseInt(fold)) {
-          result.push(item);
-        }
-      }
+    const resul = res.data.map((item: any) => {
+      return folders.map((folder: string) => {
+        return item.one_c_id === +folder;
+      });
     });
-    setPhotos(result);
+    setPhotos(resul);
     setLoading(false);
   };
 
@@ -49,6 +47,9 @@ export default function CheckPhotos() {
         </Grid>
         <Grid item xs={12}>
           <pre>{JSON.stringify(photos, null, 2)}</pre>
+        </Grid>
+        <Grid item xs={12}>
+          {photos.length}
         </Grid>
       </Grid>
     </div>
