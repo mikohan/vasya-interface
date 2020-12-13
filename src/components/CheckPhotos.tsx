@@ -2,6 +2,7 @@ import { Button, Grid } from '@material-ui/core';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Urls } from '../config';
+import Spiner from './Spiner';
 
 export default function CheckPhotos() {
   const [loading, setLoading] = useState(false);
@@ -14,17 +15,20 @@ export default function CheckPhotos() {
     setLoading(false);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Button onClick={getNoPhotoList} variant="outlined">
-            Get Items
-          </Button>
+          {loading ? (
+            <Spiner />
+          ) : (
+            <Button onClick={getNoPhotoList} variant="outlined">
+              Get Items
+            </Button>
+          )}
+        </Grid>
+        <Grid item xs={12}>
+          {photos.length}
         </Grid>
       </Grid>
 
