@@ -1,6 +1,6 @@
 import { Button, Grid, Typography } from '@material-ui/core';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Urls } from '../config';
 import Spiner from './Spiner';
 
@@ -15,12 +15,14 @@ export default function CheckPhotos() {
     const resFold = await axios.get(Urls.photoFolder);
     const folders = resFold.data.fld;
     const result: any[] = [];
-    const resul = res.data.map((item: any) => {
-      return folders.map((folder: string) => {
-        return item.one_c_id === +folder;
-      });
-    });
-    setPhotos(resul);
+    for (let item of res.data) {
+      if (item.one_c_id) {
+        if (folders.includes(item.one_c_id.toString())) {
+          result.push(item);
+        }
+      }
+    }
+    setPhotos(result);
     setLoading(false);
   };
 
