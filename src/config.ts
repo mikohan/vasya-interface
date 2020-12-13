@@ -31,7 +31,7 @@ export function makeUrls(location: string): IUrls {
     checkProductUrl: 'https://partshub.tk/vasyainterface/check',
     deleteUrl: 'https://partshub.tk/vasyainterface/workingrows/rows',
     noPhotosList: 'https://partshub.tk/vasyainterface/nophoto/',
-    photoFolder: 'https://partshub.tk/vasyainterface/checkfolders/',
+    photoFolder: 'http://localhost:8000/vasyainterface/checkfolders/',
   };
 }
 
