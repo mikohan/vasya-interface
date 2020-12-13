@@ -1,3 +1,4 @@
+import { Button, Grid } from '@material-ui/core';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Urls } from '../config';
@@ -14,5 +15,15 @@ export default function CheckPhotos() {
     getData();
   }, [photos]);
 
-  return <div>{JSON.stringify(photos, null, 2)}</div>;
+  return (
+    <div>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Button variant="outlined">Get Items</Button>
+        </Grid>
+      </Grid>
+
+      {JSON.stringify(photos, null, 2)}
+    </div>
+  );
 }
