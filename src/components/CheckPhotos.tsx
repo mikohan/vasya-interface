@@ -4,22 +4,27 @@ import { useEffect, useState } from 'react';
 import { Urls } from '../config';
 
 export default function CheckPhotos() {
+  const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      console.log(Urls.noPhotosList);
-      const res = await axios.get(Urls.noPhotosList);
-      setPhotos(res.data);
-    };
-    getData();
-  }, [photos]);
+  const getNoPhotoList = async () => {
+    setLoading(true);
+    const res = await axios.get(Urls.noPhotosList);
+    setPhotos(res.data);
+    setLoading(false);
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Button variant="outlined">Get Items</Button>
+          <Button onClick={getNoPhotoList} variant="outlined">
+            Get Items
+          </Button>
         </Grid>
       </Grid>
 
