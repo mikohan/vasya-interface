@@ -1,6 +1,6 @@
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Urls } from '../config';
 import Spiner from './Spiner';
 
@@ -20,7 +20,16 @@ export default function CheckPhotos() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           {loading ? (
-            <Spiner />
+            <React.Fragment>
+              <Grid item xs={12}>
+                <Spiner />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="h6">
+                  Wait products checking now...
+                </Typography>
+              </Grid>
+            </React.Fragment>
           ) : (
             <Button onClick={getNoPhotoList} variant="outlined">
               Get Items
@@ -31,8 +40,6 @@ export default function CheckPhotos() {
           {photos.length}
         </Grid>
       </Grid>
-
-      {JSON.stringify(photos, null, 2)}
     </div>
   );
 }
