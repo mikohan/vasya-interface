@@ -61,9 +61,11 @@ export default function ReadyPage() {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          {Object.keys(groupedRows).map((keyName: string) =>
-            day(groupedRows[keyName], keyName)
-          )}
+          {Object.keys(groupedRows).map((keyName: string) => (
+            <Grid key={keyName} item xs={12}>
+              {day(groupedRows[keyName], keyName)}
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </React.Fragment>
