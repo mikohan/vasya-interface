@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import LinkIcon from '@material-ui/icons/Link';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -51,8 +53,24 @@ export default function BasicTable({ rows }: IProps) {
               <TableCell align="right">{row.one_c_id}</TableCell>
               <TableCell align="right">{row.brand}</TableCell>
               <TableCell align="right">{row.cat_number}</TableCell>
-              <TableCell align="right">{`https://angara77.com/porter-5718143000-${row.one_c_id}/`}</TableCell>
-              <TableCell align="right">{`https://partshub.tk/product/list/${row.id}/`}</TableCell>
+              <TableCell align="right">
+                <a
+                  href={`https://angara77.com/porter-5718143000-${row.one_c_id}/`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <LinkIcon color="primary" />
+                </a>
+              </TableCell>
+              <TableCell align="right">
+                <a
+                  href={`https://partshub.tk/product/list/${row.id}/`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <LinkIcon color="primary" />
+                </a>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
