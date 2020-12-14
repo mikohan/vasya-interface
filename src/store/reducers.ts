@@ -27,7 +27,10 @@ const initState: IMainState = {
 const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
   switch (action.type) {
     case actionTypes.FETCH_ROWS_IN_WORK:
-      return { ...state, rowsInWork: action.payload };
+      return {
+        ...state,
+        rowsInWork: action.payload,
+      };
     case actionTypes.FETCH_ROWS_READY:
       return { ...state, rowsReady: action.payload };
     case actionTypes.ADD_EMPTY_ROW:
@@ -84,6 +87,11 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
       return {
         ...state,
         rowsInWork: [...state.rowsInWork],
+      };
+    case actionTypes.ORDER_ROWS:
+      return {
+        ...state,
+        rowsInWork: [...orderBy(state.rowsInWork, ['photo'], 'desc')],
       };
     default:
       return state;

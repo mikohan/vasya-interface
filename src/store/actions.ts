@@ -55,6 +55,12 @@ export type MyAction =
   | ISetOneCId
   | IMarkDone;
 
+export const orderItemsAction = () => {
+  return {
+    type: actionTypes.ORDER_ROWS,
+  };
+};
+
 export const fetchRowsFromServerThunk = () => {
   return async (dispatch: Dispatch<any>) => {
     const res = await axios.get(Urls.fetchRowsUrl);
@@ -299,6 +305,7 @@ export const checkAllAttributesAction = (ready: boolean = false) => {
       } else {
         dispatch({ type: actionTypes.UPDATE_ROWS_ATTRS, payload: newRows });
       }
+      dispatch(orderItemsAction());
       dispatch(loadingAction(false));
     }
   };

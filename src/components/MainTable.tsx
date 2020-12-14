@@ -83,7 +83,7 @@ export default function TestPage() {
   });
 
   const handleSorting = () => {
-    dispatch(sortItemsAction('photoFolder'));
+    // dispatch(sortItemsAction('photoFolder'));
   };
 
   return (
