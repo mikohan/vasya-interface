@@ -114,7 +114,9 @@ export default function TestPage() {
         </Grid>
         <Hidden mdDown>
           <Grid item xs={2}>
-            <Typography variant="h6">One C ID: {oneCId}</Typography>
+            <Typography variant="h6">
+              Total on Page: {rowsInWork.length}
+            </Typography>
           </Grid>
         </Hidden>
         <Grid item xs={4}>
