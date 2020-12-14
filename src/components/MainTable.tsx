@@ -8,6 +8,7 @@ import {
   fetchRowsFromServerThunk,
   fillOutRowWithDataThunk,
   checkAllAttributesAction,
+  orderItemsAction,
 } from '../store/actions';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
@@ -83,7 +84,7 @@ export default function TestPage() {
   });
 
   const handleSorting = () => {
-    // dispatch(sortItemsAction('photoFolder'));
+    dispatch(orderItemsAction());
   };
 
   return (
@@ -130,7 +131,10 @@ export default function TestPage() {
           )}
         </Grid>
         <Grid item xs={12}>
-          <TableComponent rowsInWork={rowsInWork} />
+          <TableComponent
+            rowsInWork={rowsInWork}
+            handleSorting={handleSorting}
+          />
         </Grid>
       </Grid>
 

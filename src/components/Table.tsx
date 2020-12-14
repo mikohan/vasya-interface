@@ -17,13 +17,16 @@ const useStyles = makeStyles((theme: Theme) =>
     topRowNumber: {
       padding: theme.spacing(2),
     },
+    cursorPointer: {
+      cursor: 'pointer',
+    },
   })
 );
 
 interface IProps {
   rowsInWork: IRow[];
   ready?: boolean;
-  handleSorting?(): IRow[];
+  handleSorting?(): void;
 }
 
 export default function TableComponent({
@@ -42,10 +45,14 @@ export default function TableComponent({
             <TableCell>Name</TableCell>
             <TableCell align="right">Brand</TableCell>
             <TableCell align="right">Cat</TableCell>
-            <TableCell align="right">Photo Fold</TableCell>
-            <TableCell align="right" onClick={handleSorting}>
-              Photo Site
+            <TableCell
+              className={classes.cursorPointer}
+              align="right"
+              onClick={handleSorting}
+            >
+              Photo Fold
             </TableCell>
+            <TableCell align="right">Photo Site</TableCell>
             <TableCell align="right">Video</TableCell>
             <TableCell align="right">Attr</TableCell>
             <TableCell align="right">Notes</TableCell>
