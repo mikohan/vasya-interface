@@ -23,9 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IProps {
   rowsInWork: IRow[];
   ready?: boolean;
+  handleSorting?(): IRow[];
 }
 
-export default function TableComponent({ rowsInWork, ready }: IProps) {
+export default function TableComponent({
+  rowsInWork,
+  ready,
+  handleSorting,
+}: IProps) {
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -38,7 +43,9 @@ export default function TableComponent({ rowsInWork, ready }: IProps) {
             <TableCell align="right">Brand</TableCell>
             <TableCell align="right">Cat</TableCell>
             <TableCell align="right">Photo Fold</TableCell>
-            <TableCell align="right">Photo Site</TableCell>
+            <TableCell align="right" onClick={handleSorting}>
+              Photo Site
+            </TableCell>
             <TableCell align="right">Video</TableCell>
             <TableCell align="right">Attr</TableCell>
             <TableCell align="right">Notes</TableCell>

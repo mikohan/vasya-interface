@@ -82,6 +82,10 @@ export default function TestPage() {
     return state.mainState.isLoading;
   });
 
+  const handleSorting = () => {
+    dispatch(sortItemsAction('photoFolder'));
+  };
+
   return (
     <React.Fragment>
       <Grid container spacing={2}>
