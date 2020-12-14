@@ -36,10 +36,13 @@ export default function ReadyPage() {
   return (
     <React.Fragment>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <Typography variant="h6">
             Ready Rows Will Refactor to group by date or some filtering
           </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="body1">Total: {rowsReady.length}</Typography>
         </Grid>
         <Grid item xs={12}>
           <TableComponent rowsInWork={rowsReady} ready={true} />
