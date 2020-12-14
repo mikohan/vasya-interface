@@ -3,6 +3,7 @@ import { IRow } from '../interfaces';
 import { MyAction } from './actions';
 
 import { actionTypes } from './types';
+import { orderBy } from 'lodash';
 
 export interface IMainState {
   rowsInWork: IRow[];
