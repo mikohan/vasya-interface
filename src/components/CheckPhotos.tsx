@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Urls } from '../config';
 import Spiner from './Spiner';
+import CheckTable from './CheckPhotoTable';
 
 export default function CheckPhotos() {
   const [loading, setLoading] = useState(false);
@@ -29,7 +30,7 @@ export default function CheckPhotos() {
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           {loading ? (
             <React.Fragment>
               <Grid item xs={12}>
@@ -47,11 +48,11 @@ export default function CheckPhotos() {
             </Button>
           )}
         </Grid>
-        <Grid item xs={12}>
-          <pre>{JSON.stringify(photos, null, 2)}</pre>
+        <Grid item xs={6}>
+          Total Photos Missing: {photos.length}
         </Grid>
         <Grid item xs={12}>
-          {photos.length}
+          <CheckTable rows={photos} />
         </Grid>
       </Grid>
     </div>

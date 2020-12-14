@@ -48,10 +48,11 @@ export default function BasicTable({ rows }: IProps) {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.one_c_id}</TableCell>
+              <TableCell align="right">{row.brand}</TableCell>
+              <TableCell align="right">{row.cat_number}</TableCell>
+              <TableCell align="right">{`https://angara77.com/porter-5718143000-${row.one_c_id}/`}</TableCell>
+              <TableCell align="right">{`https://partshub.tk/product/list/${row.id}/`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
