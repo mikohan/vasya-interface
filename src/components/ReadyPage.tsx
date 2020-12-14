@@ -8,7 +8,7 @@ import { Typography } from '@material-ui/core';
 import TableComponent from './Table';
 import { fetchRowsFromServerReadyThunk } from '../store/actions';
 import { IState } from '../store/reducers';
-import { groupBy, chain } from 'lodash';
+import { groupBy } from 'lodash';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,23 +34,36 @@ export default function ReadyPage() {
     return state.mainState.rowsReady;
   });
 
-  const groupedRows = groupBy(rowsReady, (row: IRow) => row.dateCreated);
-  // .map((value: any, key: any) => ({ date: key, row: value }));
-  console.log(groupedRows);
+  const groupedRows = groupBy(rowsReady, (row: IRow) => row.dateChanged);
+
+  const day = (dayGroup: any, keyName: string) => (
+    <React.Fragment>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Typography variant="h6">Date: {keyName}</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="body1">Total: {dayGroup.length}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TableComponent rowsInWork={dayGroup} ready={true} />
+        </Grid>
+      </Grid>
+    </React.Fragment>
+  );
 
   return (
     <React.Fragment>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Typography variant="h6">
-            Ready Rows Will Refactor to group by date or some filtering
+        <Grid item xs={12}>
+          <Typography variant="body1">
+            Total on Page: {rowsReady.length}
           </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1">Total: {rowsReady.length}</Typography>
-        </Grid>
         <Grid item xs={12}>
-          <TableComponent rowsInWork={rowsReady} ready={true} />
+          {Object.keys(groupedRows).map((keyName: string) =>
+            day(groupedRows[keyName], keyName)
+          )}
         </Grid>
       </Grid>
     </React.Fragment>

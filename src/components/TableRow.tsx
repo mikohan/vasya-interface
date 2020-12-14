@@ -186,11 +186,13 @@ export default function TableRowComponent({ myRow, ready }: IProps) {
           </a>
         </TableCell>
         <TableCell>
-          <DeleteOutlinedIcon
-            className={myRow.isDone ? classes.muttedText : ''}
-            onClick={() => handleDelete(myRow.uuid, myRow.id)}
-            color="secondary"
-          />
+          {!ready && (
+            <DeleteOutlinedIcon
+              className={myRow.isDone ? classes.muttedText : ''}
+              onClick={() => handleDelete(myRow.uuid, myRow.id)}
+              color="secondary"
+            />
+          )}
         </TableCell>
       </TableRow>
     </React.Fragment>
