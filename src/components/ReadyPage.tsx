@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core';
 import TableComponent from './Table';
 import { fetchRowsFromServerReadyThunk } from '../store/actions';
 import { IState } from '../store/reducers';
+import { groupBy, chain } from 'lodash';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +33,10 @@ export default function ReadyPage() {
   const rowsReady: IRow[] = useSelector((state: IState) => {
     return state.mainState.rowsReady;
   });
+
+  const groupedRows = groupBy(rowsReady, (row: IRow) => row.dateCreated);
+  // .map((value: any, key: any) => ({ date: key, row: value }));
+  console.log(groupedRows);
 
   return (
     <React.Fragment>
