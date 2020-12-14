@@ -30,7 +30,7 @@ export function makeUrls(location: string): IUrls {
       'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
     checkProductUrl: 'https://partshub.tk/vasyainterface/check',
     deleteUrl: 'https://partshub.tk/vasyainterface/workingrows/rows',
-    noPhotosList: 'http://localhost:8000/vasyainterface/nophoto/',
+    noPhotosList: 'https://partshub.tk/vasyainterface/nophoto/',
     photoFolder: 'http://localhost:8000/vasyainterface/checkfolders/',
   };
 }
