@@ -79,6 +79,15 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
         ...state,
         rowsInWork: [...state.rowsInWork],
       };
+    case actionTypes.CHANGE_VIDEO_URL:
+      const videoRow = state.rowsInWork.findIndex(
+        (row: IRow) => row.uuid === action.payload
+      );
+      state.rowsInWork[videoRow].videoUrl = action.videoUrl;
+      return {
+        ...state,
+        rowsInWork: [...state.rowsInWork],
+      };
     case actionTypes.PUT_ROW_TO_SERVER:
       const changeRow = state.rowsInWork.findIndex(
         (row: IRow) => row.uuid === action.payload.uuid

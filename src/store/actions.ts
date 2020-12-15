@@ -169,6 +169,7 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
       video: false,
       description: '',
       isDone: false,
+      videoUrl: '',
     };
 
     try {
@@ -340,5 +341,14 @@ export const changeDescriptionAction = (uuid: string, description: string) => {
     type: actionTypes.CHANGE_DESCRIPTION,
     payload: uuid,
     description: description,
+  };
+};
+
+export const changeVideoUrlAction = (uuid: string, videoUrl: string) => {
+  console.log(uuid, videoUrl, 'in action');
+  return {
+    type: actionTypes.CHANGE_VIDEO_URL,
+    payload: uuid,
+    videoUrl: videoUrl,
   };
 };

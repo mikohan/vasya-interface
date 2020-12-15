@@ -12,6 +12,7 @@ import {
   deleteRowThunk,
   putRowToServerThunk,
   toggleDone,
+  changeVideoUrlAction,
 } from '../store/actions';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -48,6 +49,7 @@ export default function TableRowComponent({ myRow, ready }: IProps) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [desc, setDesc] = useState(myRow.description);
+  const [videoUrl, setVideoUrl] = useState(myRow.videoUrl);
   const [checked, setChecked] = React.useState(myRow.isDone || false);
 
   const handleDesc = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -58,11 +60,20 @@ export default function TableRowComponent({ myRow, ready }: IProps) {
     dispatch(putRowToServerThunk(myRow));
   };
 
+  const handleSaveVideoUrlToServer = () => {
+    dispatch(putRowToServerThunk(myRow));
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
     dispatch(toggleDone(myRow, event.target.checked));
 
     dispatch(putRowToServerThunk(myRow));
+  };
+
+  const handleVideoUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVideoUrl(event.target.value);
+    dispatch(changeVideoUrlAction(myRow.uuid, event.target.value));
   };
 
   const handleDelete = (uuid: string, id: any): void => {
@@ -158,6 +169,20 @@ export default function TableRowComponent({ myRow, ready }: IProps) {
           ) : (
             <ClearIcon
               className={myRow.isDone ? classes.muttedText : classes.redText}
+            />
+          )}
+        </TableCell>
+        <TableCell style={customColumnStyle} align="right">
+          {ready ? (
+            myRow.videoUrl
+          ) : (
+            <TextField
+              id="standard-videoUrl"
+              label="Youtube Url"
+              multiline
+              onChange={handleVideoUrl}
+              onBlur={handleSaveVideoUrlToServer}
+              value={videoUrl}
             />
           )}
         </TableCell>

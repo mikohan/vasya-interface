@@ -16,4 +16,5 @@ export interface IRow {
   descSite?: boolean;
   linkToSite?: string;
   linkToProduct?: string;
+  videoUrl: string;
 }
