@@ -306,7 +306,7 @@ export const checkAllAttributesAction = (ready: boolean = false) => {
       } else {
         dispatch({ type: actionTypes.UPDATE_ROWS_ATTRS, payload: newRows });
       }
-      dispatch(orderItemsAction());
+      //dispatch(orderItemsAction());
       dispatch(loadingAction(false));
     }
   };
