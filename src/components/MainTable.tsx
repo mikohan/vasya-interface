@@ -48,7 +48,6 @@ export default function TestPage() {
   const rowsInWork: IRow[] = useSelector((state: any) => {
     return state.mainState.rowsInWork;
   });
-  console.log(rowsInWork);
 
   const handleChangeOneC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value);
