@@ -9,6 +9,7 @@ import {
   fillOutRowWithDataThunk,
   checkAllAttributesAction,
   orderItemsAction,
+  orderItemsByDateCreateAction,
 } from '../store/actions';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
@@ -47,6 +48,7 @@ export default function TestPage() {
   const rowsInWork: IRow[] = useSelector((state: any) => {
     return state.mainState.rowsInWork;
   });
+  console.log(rowsInWork);
 
   const handleChangeOneC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value);
@@ -85,6 +87,10 @@ export default function TestPage() {
 
   const handleSorting = () => {
     dispatch(orderItemsAction());
+  };
+
+  const handleSortingDataCreated = () => {
+    dispatch(orderItemsByDateCreateAction());
   };
 
   return (
@@ -136,6 +142,7 @@ export default function TestPage() {
           <TableComponent
             rowsInWork={rowsInWork}
             handleSorting={handleSorting}
+            handleSortingDataCreated={handleSortingDataCreated}
           />
         </Grid>
       </Grid>

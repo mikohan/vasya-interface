@@ -60,6 +60,11 @@ export const orderItemsAction = () => {
     type: actionTypes.ORDER_ROWS,
   };
 };
+export const orderItemsByDateCreateAction = () => {
+  return {
+    type: actionTypes.ORDER_ROWS_BY_DATE_CREATED,
+  };
+};
 
 export const fetchRowsFromServerThunk = () => {
   return async (dispatch: Dispatch<any>) => {

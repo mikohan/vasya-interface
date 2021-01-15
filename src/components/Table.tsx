@@ -27,12 +27,14 @@ interface IProps {
   rowsInWork: IRow[];
   ready?: boolean;
   handleSorting?(): void;
+  handleSortingDataCreated?(): void;
 }
 
 export default function TableComponent({
   rowsInWork,
   ready,
   handleSorting,
+  handleSortingDataCreated,
 }: IProps) {
   const classes = useStyles();
   return (
@@ -42,6 +44,12 @@ export default function TableComponent({
           <TableRow>
             <TableCell>Done</TableCell>
             <TableCell>OneCId</TableCell>
+            <TableCell
+              className={classes.cursorPointer}
+              onClick={handleSortingDataCreated}
+            >
+              Date
+            </TableCell>
             <TableCell>Name</TableCell>
             <TableCell align="right">Brand</TableCell>
             <TableCell align="right">Cat</TableCell>

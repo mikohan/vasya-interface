@@ -103,6 +103,9 @@ export default function TableRowComponent({ myRow, ready }: IProps) {
         <TableCell className={myRow.isDone ? classes.muttedText : ''}>
           {myRow.oneCId}
         </TableCell>
+        <TableCell className={myRow.isDone ? classes.muttedText : ''}>
+          {myRow.dateCreated}
+        </TableCell>
         <TableCell
           className={myRow.isDone ? classes.muttedText : ''}
           component="th"

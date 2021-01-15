@@ -102,6 +102,11 @@ const mainReducer = (state: IMainState = initState, action: MyAction | any) => {
         ...state,
         rowsInWork: [...orderBy(state.rowsInWork, ['photo'], 'desc')],
       };
+    case actionTypes.ORDER_ROWS_BY_DATE_CREATED:
+      return {
+        ...state,
+        rowsInWork: [...orderBy(state.rowsInWork, ['dateCreated'], 'desc')],
+      };
     default:
       return state;
   }
