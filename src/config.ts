@@ -8,6 +8,8 @@ interface IUrls {
   photoFolder: string;
 }
 
+const apiUrl = 'https://angara77.ru';
+
 export function makeUrls(location: string): IUrls {
   if (location === 'local') {
     return {
@@ -23,14 +25,13 @@ export function makeUrls(location: string): IUrls {
     };
   }
   return {
-    fetchRowsUrl: 'https://partshub.tk/vasyainterface/workingrows/rows/',
-    fetchRowsDoneUrl:
-      'https://partshub.tk/vasyainterface/workingrows/rowsdone/',
+    fetchRowsUrl: `${apiUrl}/vasyainterface/workingrows/rows/`,
+    fetchRowsDoneUrl: `${apiUrl}/vasyainterface/workingrows/rowsdone/`,
     angaraUrl:
       'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
-    checkProductUrl: 'https://partshub.tk/vasyainterface/check',
-    deleteUrl: 'https://partshub.tk/vasyainterface/workingrows/rows',
-    noPhotosList: 'https://partshub.tk/vasyainterface/nophoto/',
+    checkProductUrl: `${apiUrl}/vasyainterface/check`,
+    deleteUrl: `${apiUrl}/vasyainterface/workingrows/rows`,
+    noPhotosList: `${apiUrl}/vasyainterface/nophoto/`,
     photoFolder: 'http://localhost:8000/vasyainterface/checkfolders/',
   };
 }
