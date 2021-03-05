@@ -148,10 +148,7 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
     dispatch(loadingAction(true));
     const res = await axios.get(`${Urls.angaraUrl}${oneCId}`);
     const data = await res.data;
-    try {
-    } catch (e) {
-      console.log(e.result.data);
-    }
+    console.log('Console log :', data);
 
     let populatedRow: IRow;
 
@@ -188,7 +185,7 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
         })
       );
       dispatch(toggleSnakbarAction(true));
-      console.log(error.response.data);
+      // console.log(error.response.data);
     }
 
     populatedRow = { ...newRow };
@@ -224,7 +221,7 @@ export const fillOutRowWithDataThunk = (oneCId: number) => {
         }
         dispatch(errorMessageAction(errorMessage));
         dispatch(toggleSnakbarAction(true));
-        console.log(error.response.data);
+        // console.log(error.response.data);
       }
     }
 

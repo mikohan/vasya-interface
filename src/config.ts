@@ -17,7 +17,7 @@ export function makeUrls(location: string): IUrls {
       fetchRowsDoneUrl:
         'http://localhost:8000/vasyainterface/workingrows/rowsdone/',
       angaraUrl:
-        'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
+        'https://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
       checkProductUrl: 'https://partshub.tk/vasyainterface/check',
       deleteUrl: 'http://localhost:8000/vasyainterface/workingrows/rows',
       noPhotosList: 'http://localhost:8000/vasyainterface/nophoto/',
@@ -28,7 +28,7 @@ export function makeUrls(location: string): IUrls {
     fetchRowsUrl: `${apiUrl}/vasyainterface/workingrows/rows/`,
     fetchRowsDoneUrl: `${apiUrl}/vasyainterface/workingrows/rowsdone/`,
     angaraUrl:
-      'http://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
+      'https://angara77.com/admin33338/dataApi/vasyaInterfaceEndpoint.php?oneCId=',
     checkProductUrl: `${apiUrl}/vasyainterface/check`,
     deleteUrl: `${apiUrl}/vasyainterface/workingrows/rows`,
     noPhotosList: `${apiUrl}/vasyainterface/nophoto/`,
